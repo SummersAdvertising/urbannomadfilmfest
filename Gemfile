@@ -2,10 +2,22 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.8'
 
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
+group :production, :staging do
+  gem "mysql2"
+end
 
-gem 'sqlite3'
+group :development, :test do
+  gem "sqlite3"
+end
+
+#for pagination
+gem 'kaminari'
+#for image upload
+gem 'carrierwave'
+gem "mini_magick"
+
+#for form using "remote = true" and "multi-part = true" at the same time
+gem 'remotipart'
 
 
 # Gems used only for assets and not required
@@ -32,7 +44,11 @@ gem 'jquery-rails'
 # gem 'unicorn'
 
 # Deploy with Capistrano
-# gem 'capistrano'
+gem 'capistrano'
+gem 'capistrano-ext'
+
+gem 'globalize3'
+
 
 # To use debugger
 # gem 'debugger'

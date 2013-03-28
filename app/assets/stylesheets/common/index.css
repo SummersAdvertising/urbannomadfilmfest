@@ -1,0 +1,9 @@
+.movie{width:260px;height:500px;float:left;margin:0 2px;overflow:hidden;position:relative}
+.movie a .post{background:url(../images/frame.jpg);width:260px;height:377px;padding:35px 0 0 30px}
+.movie a .info{color:#fff;padding:0 0 0 27px}
+.movie a hgroup{color:#FF00EF;height:55px}
+.movie h3{font:900 24px "微軟正黑體"}
+.movie h4{font:900 12px "微軟正黑體"}
+.movie p{font:300 12px "微軟正黑體";color:#ccc}
+
+.movie a:hover hgroup,.movie a:hover p{text-decoration:underline}

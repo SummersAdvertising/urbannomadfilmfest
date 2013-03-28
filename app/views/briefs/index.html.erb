@@ -1,0 +1,29 @@
+<h1>Listing briefs</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Content</th>
+    <th>New create</th>
+    <th>Status</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @briefs.each do |brief| %>
+  <tr>
+    <td><%= brief.name %></td>
+    <td><%= brief.content %></td>
+    <td><%= brief.new_create %></td>
+    <td><%= brief.status %></td>
+    <td><%= link_to 'Show', brief %></td>
+    <td><%= link_to 'Edit', edit_brief_path(brief) %></td>
+    <td><%= link_to 'Destroy', brief, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Brief', new_brief_path %>

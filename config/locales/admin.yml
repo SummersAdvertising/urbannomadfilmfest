@@ -1,0 +1,28 @@
+zh_TW:
+  admin:
+    insert_video: "插入影片"
+    insert_video_tip: "請將整段youtube連結貼到此處"
+    insert_photo: "插入圖片"
+    insert_text: "插入文字"
+    
+    empty_tip: "請輸入內容"
+  
+    users: 
+      modulename: "管理使用者"
+      
+      no_user_exists: "尚未建立任何使用者"
+      
+    brief: 
+      modulename: "電影介紹"
+      
+      cover: "電影封面海報"
+      
+      new_brief: "建立新簡介"
+      
+      delete_confirm: "確定刪除此電影簡介？"
+      no_brief_exists: "尚未建立任何電影介紹"
+      
+     
+    
+    upload:
+      miss_tip: "請選擇要上傳的檔案"

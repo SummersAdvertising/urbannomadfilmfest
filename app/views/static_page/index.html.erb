@@ -1,0 +1,60 @@
+<body>
+  <div>
+    <div class="main">
+      <div class="boxTop">
+        <div class="index_menu">
+          <ul>
+            <li class="about"><a href="/intro" target="_self" title="果園簡介">果園簡介</a></li>
+            <li class="product"><a href="/product" target="_self">產品介紹</a>
+              <ul>
+                <a href="/product?openDiv=peach" title="水蜜桃"><li class="peach">水蜜桃</li></a>
+                <a href="/product?openDiv=pear" title="梨"><li class="pear">梨</li></a>
+                <a href="/product?openDiv=persimmon" title="甜柿"><li class="persimmon">甜柿</li></a>
+              </ul>
+            </li>
+            <li class="buy"><a href="/orders" target="_self" title="線上訂購">線上訂購</a></li>
+            <li class="message"><a href="/questions" target="_self" title="留言板">留言板</a></li>
+          </ul>
+        </div>
+        <div class="productArea">
+          <div id="fruitArea">
+            <div class="slides">
+              <ul>
+                <li>
+                  <a href="/product?openDiv=peach" target="_self" title="水蜜桃"><img src="images/fruit1.jpg" alt="華新果園水果-水蜜桃" /></a>
+                  <div><img src="images/fruit-word1.png" width="178" height="83" alt="愛情的滋味-華新果園水果-水蜜桃"/><br  />
+                    果香濃郁、甜美多汁<br/></div>
+                </li>
+                <li><a href="/product?openDiv=pear#pear-3" target="_self" title="雪梨"><img src="images/fruit2.jpg" alt="華新果園水果-雪梨" /></a>
+          <div><img src="images/fruit-word2.png" width="178" height="83" alt="下了一場梨山雪-華新果園水果-雪梨"/><br  />
+            體型、重量、甜度或口感， <br  />
+            皆為梨中之王</div>
+        </li>
+				<li><a href="/product?openDiv=persimmon" target="_self" title="甜柿"><img src="images/fruit3.jpg" alt="華新果園水果-甜柿" /></a>
+          <div><img src="images/fruit-word3.png" width="178" height="83" alt="只留住青春的甘甜-華新果園水果-甜柿"/><br  />
+            無澀味，獨留色香味 <br  /></div>
+        </li>
+			</ul>
+		</div>
+		<a href="#" class="prev">&lt;</a>
+		<a href="#" class="next">&gt;</a>
+    </div>
+              </div>
+              <div class="mainTitle"><img src="images/main_title.gif" width="357" height="442" alt="梨山華新果園-水果細心栽培，綠肥作物-嚴格把關，無農藥殘留之虞慮"/></div>
+              <div class="farmer"><img src="images/farmer.png" width="200" height="370" /></div>
+        </div>
+    </div>
+  <div class="boxBottom">
+  		<h1>最新消息：<span><a href="/news" title="更多消息">More...</a></span></h1>
+        <div class="point"></div>
+        <div class="newsArea">
+            <ul>
+            	<% @news.each do |news| %>
+              <% if(!news.newcreate) %>
+                <li><%= news.created_at.strftime("%Y/%m/%d") %>： <%= link_to news.name, news %></li>
+              <% end %>
+              <% end %>
+            </ul>
+        </div>
+    </div>
+  </body>

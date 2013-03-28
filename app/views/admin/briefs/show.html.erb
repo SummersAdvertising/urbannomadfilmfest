@@ -1,0 +1,69 @@
+<div id="main" class="right">
+  <div class="main-list">
+    <% if @brief.cover %>
+    <p><%=image_tag(@brief.cover) %></p>
+    <% else %>
+    <p>尚未上傳封面</p>
+    <% end %>
+
+    <input id="brief_content" style="display:none;" type="text" value="<%=@brief.content%>">
+    <div id="articleContent" class="main-text"></div>
+    
+
+    <table width="80%">
+      <tr>
+        <th>顯示在前台</th>
+        <th colspan="4">Name</th>        
+      </tr>
+
+    </table>
+
+    <br />
+
+    <%= link_to 'Back', admin_category_briefs_path(@category, :locale => I18n.locale) %>
+  </div>
+</div>
+<!--main--> 
+
+<script type="text/javascript">
+$(document).ready(function() {
+  $("#briefes").addClass("active");
+  showContent();
+
+  function showContent(){
+    if($("#brief_content").val())
+    {
+      var obj = JSON.parse($("#brief_content").val());
+      var article = "";
+      for(i=0;i<obj.article.length;i++)
+      {
+        var paragraph = obj.article[i];
+
+        if(JSON.stringify(paragraph.type)=='"paragraph"')
+        {
+          article = "<div class='paragraphContainer' data-type='paragraph'><p style='font-size: "+paragraph.fontSize+"; color: "+paragraph.color+"'>";
+
+          if(paragraph.link){
+            article += "<a target='_blank' href='"+paragraph.link+"'>"+jsonReplace(JSON.stringify(paragraph.content)).replace(/\\n/g, "<br />")+"</a></p></div>";
+          }
+          else{
+            article += jsonReplace(JSON.stringify(paragraph.content)).replace(/\\n/g, "<br />")+"</p></div>";
+          }
+        }
+        else if(JSON.stringify(paragraph.type)=='"image"')
+        {
+          article = "<div class='paragraphContainer' data-type='image' data-photo_id=\"" + paragraph.id + "\"><img alt=" + JSON.stringify(paragraph.id) + " src=" + JSON.stringify(paragraph.path) + " title=" + JSON.stringify(paragraph.id) + " /></div>";
+        }
+        else if (JSON.stringify(paragraph.type)=='"video"') {
+          article = "<div  class='paragraphContainer' data-type='video' data-code=\"" + paragraph.code + "\"><iframe width=\"480\" height=\"290\" data-code=\"" + paragraph.code + "\" src=\"http://www.youtube.com/embed/" + paragraph.code+ "\" frameborder=\"0\" allowfullscreen></iframe></div>";
+        }
+        $("#articleContent").append(article);
+      }
+    }
+  }
+
+  function jsonReplace(string){return string.replace(/"([^"]*)"/g, "$1");}
+  
+});
+
+</script>

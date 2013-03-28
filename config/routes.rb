@@ -1,4 +1,30 @@
 Urbannomadfilmfest::Application.routes.draw do
+
+  scope "(:locale)/" do
+  	resources :briefs
+  	
+	match "/admin/createAdmin" => "admin#createAdmin", :via => :post
+	match "/admin/loginCheck" => "admin#loginCheck", :via => :post
+	match "/admin/update" => "admin#update", :via => :put
+	
+	namespace :admin do
+		get '/' => 'admin#showAdmins'    
+		get "sign_up", "log_in", "log_out", "edit"
+		
+		match 'showAdmins' => 'admin#showAdmins' 
+		
+		resources :categories, :except => [:new, :edit, :destroy] do
+			resources :briefs, :except => :new do
+			  match 'uploadPhoto' => 'briefs#createPhoto', :via => [:post]
+			  match 'deletePhoto/:id' => 'briefs#destroyPhoto', :via => [:delete]
+			end
+		end
+	end
+	
+	root :to => "static_page#index"
+  	
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
