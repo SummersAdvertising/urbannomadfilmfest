@@ -1,4 +1,4 @@
-set :application, 	"zhiyan"
+set :application, 	"urbannomadfilmfest"
 set :domain, 		"li406-49.members.linode.com"
 set :repository, 	"git@github.com:SummersAdvertising/urbannomadfilmfest.git"
 set :deploy_to,		"/var/spool/RoR-Projects/urbannomadfilmfest"

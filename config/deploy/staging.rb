@@ -16,7 +16,7 @@ set :scm_verbose, true
 set :use_sudo, false
 set :user, "deploy"
 set :password, "1qaz2wsx"
-set :group, "webs"
+set :group, "deploy"
 
 default_environment["PATH"] = "/opt/ree/bin:/usr/local/bin:/usr/bin:/bin:/usr/games"
 
@@ -34,6 +34,6 @@ before("deploy:finalize_update") do
 	db_config = "#{shared_path}/config/database.yml.production"
 	#db_config = "#{db_config} #{release_path}/config/database.yml.production"
 	run "cp #{db_config} #{release_path}/config/database.yml"
-	
+	run "cd #{release_path}; RAILS_ENV=production rake db:create"
 end
 
