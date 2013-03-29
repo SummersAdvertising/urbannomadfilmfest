@@ -1,0 +1,66 @@
+/*---全域背景---*/
+html{background:image-url("bg.jpg")}
+
+/*---上方列---*/
+header{background:#000;border-color:#222}
+
+/*---標題---*/
+h1 a{text-shadow:0 1px 0 #000B26}
+
+/*---內容邊框---*/
+article{border:1px solid #222}
+
+/*---頁腳---*/
+footer{color:#ccc;text-shadow:0 1px 0 #111}
+footer a{color:#ccc;text-shadow:0 1px 0 #111}
+
+/*-----------------------------------------------------------------------內容---*/
+
+.text p{padding:0 0 10px 0;line-height:1.7em}
+.text .font-blue{font:300 14px "微軟正黑體";color:#6fa8dc}
+.text .font-red{font:300 14px "微軟正黑體";color:#ff0000}
+.text .font-pink{font:900 24px "微軟正黑體";color:#ff00ef}
+
+.preview .font-blue{font:300 14px "微軟正黑體";color:#6fa8dc}
+.preview .font-red{font:300 14px "微軟正黑體";color:#ff0000}
+.preview .font-pink{font:900 24px "微軟正黑體";color:#ff00ef}
+
+/*-----------------------------------------------------------------------語言---*/
+
+#lang{overflow:hidden;width:55px;height:13px;position:absolute;top:20px;margin-left:190px;z-index:9;-webkit-transition:all ease .3s;-moz-transition:all ease .3s}
+#lang img{position:relative;top:1px}
+#lang:hover{width:165px;}
+#lang a{padding:0;display:inline-box;width:50px;height:13px;font:300 11px 新細明體,Times New Roman;text-shadow:none;padding:0 5px 0 0;color:#aaa}
+#lang a:hover{color:#fff}
+
+/*-----------------------------------------------------------------------登入---*/
+
+.login #main{background:image-url("bg.jpg");display:table;width:100%;height:100%}
+.login #vert{display:table-cell; vertical-align:middle;width:100%;height:100%}
+.login article{width:300px;float:none;margin:0 auto;}
+.login .text{border:none;background:none;padding:0}
+.login .text div{padding:5px 0}
+
+@media screen and (max-width: 543px){
+footer{box-shadow:none}
+#nav-ctrl,aside{background:#000;border:1px solid #333}
+#nav-ctrl:hover,aside:hover{background:#333}
+#nav-ctrl:active,aside:active{background:#333}
+.login article{width:90%;border-radius:5px;padding:10px;height:185px;}
+}
+
+@media screen and (min-width: 544px) and (max-width: 896px){
+nav .active a{border-color:#222}
+#aside-box a{border:1px solid #333;background:#000;color:#ccc}
+#aside-box a:hover{background:#333}
+nav li a{color:#ccc;text-shadow:0 1px 0 #111}
+.login article{width:80%;padding:20px;height:210px;}
+}
+
+@media screen and (min-width: 897px){
+nav .active a{border-color:#222}
+#aside-box a{border:1px solid #333;background:#000;color:#ccc}
+#aside-box a:hover{background:#333}
+nav li a{color:#ccc;text-shadow:0 1px 0 #111}
+.login article{width:70%;max-width:717px;padding:30px;height:235px;}
+}

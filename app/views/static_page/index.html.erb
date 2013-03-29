@@ -80,22 +80,28 @@
       <a href="http://www.summers.com.tw/" target="_blank">網頁製作由<br>夏天廣告贊助</a> </div>
   </aside>
   <article>
-    <div class="movie">
-    <a href="#">
-      <div class="post"><img src="<%= image_path("movie-01.jpg") %>" width="207" height="304"></div>
-      <!--post-->
-      <div class="info">
-        <hgroup>
-          <h3>台灣牡蠣</h3>
-          <h4>THE TAIWAN OYSTER</h4>
-        </hgroup>
-        <p> 美國 / 2012 / 105 分鐘<br>
-          英文 / 中文字幕<br>
-          導演：Mark Jarrett </p>
-      </div>
-      <!--info-->
-      </a> 
-    </div>
+  
+  	<% @briefs.each do | brief | 
+	  	next if brief.status != 'enable'
+  	%>  		
+	    <div class="movie">
+	    <a href="#">
+	      <div class="post"><img src="<%= brief.cover %>" width="207" height="304"></div>
+	      <!--post-->
+	      <div class="info">
+	        <hgroup>
+	          <h3><%= brief.title %></h3>
+	          <h4><%= brief.en_title %></h4>
+	        </hgroup>
+	        <p> 美國 / 2012 / 105 分鐘<br>
+	          英文 / 中文字幕<br>
+	          導演：Mark Jarrett </p>
+	      </div>
+	      <!--info-->
+	      </a> 
+	    </div>
+  	<% end %>
+  
     <!--movie-->
     <div class="movie">
     <a href="#">

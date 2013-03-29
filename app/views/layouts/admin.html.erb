@@ -1,44 +1,119 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><%= t("admin.page_title") %></title>
+<!--[if lt IE 9]>
+<script src="js/html5.js"></script>
+<link rel="stylesheet" href="css/desktop.css">
+<![endif]-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+<meta name="Robots" content="index,follow"/>
+<meta http-equiv="content-language" content="zh-TW" />
+<title>遊牧影展後台管理系統</title>
+
+<%= stylesheet_link_tag "reset", :media => "all" %>
 <%= stylesheet_link_tag "admin", :media => "all" %>
+<%= stylesheet_link_tag "alertify", :media => "all" %>
+<%= stylesheet_link_tag "custom", :media => "all" %>
+
+<%= stylesheet_link_tag "adminRWD/mobile", :media => "screen and (max-width: 543px)" %>
+<%= stylesheet_link_tag "adminRWD/tablet", :media => "screen and (min-width: 544px) and (max-width: 896px)" %>
+<%= stylesheet_link_tag "adminRWD/desktop", :media => "screen and (min-width: 897px)" %>
+
+<title><%= t("admin.page_title") %></title>
+
 <%= javascript_include_tag "application" %>
 <%= csrf_meta_tags %>
-</head>
+
+<script>
+$(document).ready(function() {	
+	$('#aside-ctrl').click(function(event) { 
+   /* aside-box 顯示後,綁上點擊document中的物件隱藏 aside-box 的事件 */
+    $('#aside-box').fadeIn(function(){
+      $(document).click(function() {
+        $('#aside-box').fadeOut();
+        $(document).unbind();
+      });
+    });
+
+    event.preventDefault();
+	});  
+	
+  var isNavOpen = false;
+	$('#nav-ctrl').click(function() {
+    $('#nav-ctrl').unbind();
+    showNav();
+	});
+
+  function showNav(){
+    var leftPosition;
+
+    switch(isNavOpen){
+      case true:
+        leftPosition = 0;
+        break;
+      case false:
+        leftPosition = 150;
+        break;
+    }
+    
+    $('article').animate({ left: leftPosition }, 1000, 'easeOutQuad', function() {
+      $('#nav-ctrl').click(function() {
+        $('#nav-ctrl').unbind();
+        showNav();
+      });
+    });
+
+    isNavOpen = isNavOpen? false : true;
+  }
+});
+</script>
+<script>
+$(function(){	
+	var _showTab = 0;
+	var $defaultLi = $('.tab li').eq(_showTab).addClass('active');
+	$($defaultLi.find('a').attr('href')).siblings().hide();
+ 	$('.tab li').click(function() {		
+		var $this = $(this),
+			_clickTab = $this.find('a').attr('href');		
+		$this.addClass('active').siblings('.active').removeClass('active');		
+		$(_clickTab).stop(false, true).fadeIn().siblings().hide(); 
+		return false;
+		}).find('a').focus(function(){
+			this.blur();
+	});
+});
+</script>
 
 <body>
-<div id="top-out">
-  <div id="top">
-    <h1 class="left"><a href="/admin">龍全 - 後台管理系統</a></h1>
-    <div class="right">
+<header _height="none">
+  <section id="top"> <a id="nav-ctrl"><img src="images/nav.png"></a>
+    <div id="lang"> <a href="#"><img src="images/tw.png"> 繁中</a> <a href="#"><img src="images/us.png"> English</a> </div>
+    <h1><a href="#">遊牧影展後台管理系統</a></h1>
+    <aside> <a id="aside-ctrl"><img src="images/set.png"></a>
+      <div id="aside-box"> 
       <%if session[:admin]%>
-      你好，<%= session[:admin]%>！<a href="/admin/edit">修改個人資料</a><a href="/admin/log_out">登出</a>
+      你好，<%= session[:admin]%>！<a href="/admin/edit">修改個人資料</a><a href="/admin/log_out">登出</a><a href="<%= root_url %>">返回首頁</a> 
       <% end %>
-
-      <a href="/home">返回首頁</a>
-
-    </div>
-  </div>
+      </div>
+    </aside>
+  </section>
   <!--top--> 
-</div>
-<!--top-out-->
-<div id="container">
+</header>
+
+<section id="main" _height="auto">
   <%if session[:admin]%>
-  <div id="side" class="left">
+  <nav>
     <ul>
-      <li><a href="<%= url_for( :controller => :admin, :action => :showAdmins ) %>" id="users"><%= t("admin.users.modulename") %></a></li>
-      <li><a href="<%= admin_category_briefs_path( Category.first, :locale => I18n.locale ) %>" id="briefs"><%= t('admin.brief.modulename') %></a></li>
+      <li><a href="<%= admin_category_briefs_path( Category.first, :locale => I18n.locale ) %>" id="nav-1"><%= t('admin.brief.modulename') %></a></li>
     </ul>
-  </div>
+  </nav>  
   <% end %>
 
 <%= yield %>
 
-</div>
-<!--container-->
-<div id="footer"></div>
-<!--footer-->
+</section>
+<!--main-->
+<footer _height="none"> Copyright © <a href="http://www.summers.com.tw/" target="_blank">Summers</a> </footer>
 </body>
 </html>

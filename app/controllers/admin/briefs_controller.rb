@@ -83,6 +83,7 @@ class Admin::BriefsController < ApplicationController
   def update
     @brief = Brief.find(params[:id])
 
+
     respond_to do |format|
       if @brief.update_attributes(params[:brief])
         format.html { redirect_to admin_category_brief_path(@category, @brief, :locale => I18n.locale), notice: 'Brief was successfully updated.' }

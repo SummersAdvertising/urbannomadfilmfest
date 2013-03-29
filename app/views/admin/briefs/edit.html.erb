@@ -1,66 +1,90 @@
-<!--side-->
-<div id="main" class="right">
-  <div class="main-title">
-    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-      <tr>
-        <td valign="top" class="title" height="22" width="98"><%= DateTime.now.to_date %></td>
-        <td valign="middle" class="text"><input id="brief_title" type="text" /></td>
-      </tr>
-    </table>
-  </div>
-  <div class="main-title">
+  <article>
+    <section class="hgroup">
+      <h2>首頁短文簡介</h2>
+    </section>
+    <!--hgroup-->
     <%= form_for(@brief, :url => admin_category_brief_path(@category, @brief, :locale => I18n.locale), :method => "put") do |f| %> 
-
-    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-      <tr>
-        <td valign="top" class="title" height="22" width="98"><%= t("admin.brief.cover") %></td>
-        <td valign="middle" class="text"><%= f.file_field :cover %></td>
-      </tr>
-      <tr>
-        <td valign="middle" class="text">在前台顯示</td><td>
-        <input type="checkbox" id="briefFrontshow" /></td>
-      </tr>
-      <tr>
-        <td valign="middle" class="text"><%= t("admin.brief.intro") %></td>
-        <td><%= f.text_area :intro %></td>
-      </tr>
-    </table>
     
-    <div style="display: none;">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-
-    <%= f.text_field :status %>
-
-    <input id="brief_nameOrigin" type="text" value="">
-    <%= f.label :content %>
-    <%= f.text_field :content %>
-    <input id="brief_contentOrigin" type="text" value="">
-    </div>
-    <% end %>
-   
-  </div>
-
+	<div style="display: none;">
+	<%= f.label :name %>
+	<%= f.text_field :name %>
+	
+	
+	<input id="brief_nameOrigin" type="text" value="">
+	<%= f.label :content %>
+	<%= f.text_field :content %>
+	<input id="brief_contentOrigin" type="text" value="">
+	
+	</div>
+	
+    <section class="title">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <th><%= DateTime.now.to_date %></th>
+          <td><input id="brief_title" type="text" placeholder="請輸入文字" value="<%= @brief.name %>" /></td>
+        </tr>
+      </table>
+    </section>
+    <!--title-->
     
-
-  <ul id="tab">
-    <li data-name="paragraph"><a href="#main-text-p"><img src="/images/edit.png"><%= t("admin.insert_text") %></a></li>
-    <li data-name="image"><a href="#main-text-img"><img src="/images/img.png"/><%= t("admin.insert_photo") %></a></li>
-    <li data-name="video"><a href="#main-text-video"><img src="/images/video.png"><%= t("admin.insert_video") %></a></li>
-  </ul>
-
-  <div class="main-text">
+    <section class="text text-edit">
+      <div class="one">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <th valign="top"><%= f.label :en_name, 'Name in English' %></th>
+            <td><%= f.text_field :en_name, :placeholder => "請輸入文字" %></td>
+          </tr>
+        </table>
+      </div>
+      <div class="one">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <th valign="top"><%= t("admin.brief.intro") %></th>
+            <td><%= f.text_area :intro, :placeholder => "請輸入文字" %></textarea></td>
+          </tr>
+        </table>
+      </div>
+      <div class="one">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <th valign="top"><%= t("admin.brief.cover") %></th>
+            <td><%= f.file_field :cover %></td>
+          </tr>
+        </table>
+      </div>
+      <div class="one">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+		      <tr>
+		        <td valign="middle" class="text">在前台顯示</td><td>
+		        <input type="checkbox" id="briefFrontshow" /></td>
+		      </tr>
+        </table>
+      </div>
+      
+    </section>
+    <!--text-->
+    <section class="button">
+    <a id="btnSubmit" href="javascript:void(0);"><img src="<%= image_path("save.png") %>">儲存</a>
+    <a id="btnCancel" href="javascript:void(0);"><img src="<%= image_path("cancel.png") %>">取消</a>
+    </section>
+    <!--button--> 
+    <section class="hgroup">
+      <h2>內文詳細介紹</h2>
+    </section>
+    <!--hgroup-->
+    
+    <section class="tab">
+	  <ul id="tab">
+	    <li data-name="paragraph"><a href="#main-text-p"><img src="<%= image_path("edit.png") %>"><%= t("admin.insert_text") %></a></li>
+	    <li data-name="image"><a href="#main-text-img"><img src="<%= image_path("img.png") %>"/><%= t("admin.insert_photo") %></a></li>
+	    <li data-name="video"><a href="#main-text-video"><img src="<%= image_path("video.png") %>"><%= t("admin.insert_video") %></a></li>
+	  </ul>
+    </section>
+    <!--tab-->
+    <section class="post">
+    
+    
     <div id="main-text-p">
-       <!-- <select id="newParagraphFontSize" >
-           <option value="" selected="selected">-- 大小 --</option>
-         <option value="14">14</option>
-         <option value="28">28</option>
-       </select>
-       <select id="newParagraphColor" >
-           <option value="" selected="selected">-- 顏色 --</option>
-         <option value="#000">black</option>
-         <option value="#00F">blue</option>
-       </select> -->
        <select id="newParagraphClass" >         
          <option value="font-white">-- Default --</option>
          <option value="font-blue">藍字 / Blue</option>
@@ -75,71 +99,40 @@
       <%= p.file_field :image, :class => "autogrow" %>
       <div id="error"></div>
       <% end %>
-    </div>
-    
+    </div>    
       <div id="main-text-video" >
         <div class="edit-text">
           <input id="newVideoContent" class="autogrow" style="width: 320px;" placeholder="<%=t("admin.insert_video_tip")%>" />
         </div>
-        <div class="button" id="newVideo"><a href="#"><img src="/images/add.png">新增連結</a></div>
+        <div class="button" id="newVideo"><a href="#"><img src="<%= image_path("add.png") %>">新增連結</a></div>
         <div id="videoPreview"></div>
       </div>
-      
-  </div>
-  <div class="button" id="btnAddElement"><a href="#"><img src="/images/add.png">新增</a></div>
-
-
-  <div id="tips">
-    <h2>文章預覽</h2>
-    <p> <img src="/images/tag.png"/>提示：將滑鼠移至段落內容，可進行拖曳排序以及修改刪除。</p>
-  </div>
-
-  <div class="main-preview">
+    </section>
+    <!--post-->
     
-    <!--show the content of article -->
-    <div id="articleContent" class="sortable"></div>
-
-    <div id='formerror'></div>
-
-    <div class="buttonArea">
-      <div class="button" id="btnSubmit"><a href="#"><img src="/images/save.png">儲存</a></div>
-      <div class="button" id="btnCancel"><a href="#"><img src="/images/cancel.png">取消</a></div>
-    </div>
-    <!--main-text--> 
-  </div>
-  <!--main-->
+    <section class="button"> <a id="btnAddElement" href="#"><img src="<%= image_path("add.png") %>">新增段落</a> </section>
+    <!--button-->
+    
+    <section class="hgroup">
+      <h2>文章預覽</h2>
+      <p>（可拖曳文章段落排序）</p>
+    </section>
+    <!--hgroup-->
+    
+    
+    <section id="articleContent" class="sortable preview">
+	  <!--show the content of article -->
+    </section>
+    <!--preview-->
+    
+	<% end %>
+    <!--button--> 
+  </article>
+      
 
 <script type="text/javascript">
 $(document).ready(function(){
   $("#briefs").addClass("active");
-});
-</script>
-<script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
-<script type="text/javascript">
-$(function(){
-  $("#update").addClass("active");
-
-  // 預設顯示第一個 Tab
-  var _showTab = 0;
-  var $defaultLi = $('#tab li').eq(_showTab).addClass('active');
-  $($defaultLi.find('a').attr('href')).siblings().hide();
- 
-  // 當 li 頁籤被點擊時...
-  // 若要改成滑鼠移到 li 頁籤就切換時, 把 click 改成 mouseover
-  $('#tab li').click(function() {
-    // 找出 li 中的超連結 href(#id)
-    var $this = $(this),
-      _clickTab = $this.find('a').attr('href');
-    // 把目前點擊到的 li 頁籤加上 .active
-    // 並把兄弟元素中有 .active 的都移除 class
-    $this.addClass('active').siblings('.active').removeClass('active');
-    // 淡入相對應的內容並隱藏兄弟元素,把.show()改成.hide()
-    $(_clickTab).stop(false, true).fadeIn().siblings().hide();
- 
-    return false;
-    }).find('a').focus(function(){
-      this.blur();
-  });
 });
 </script>
 
@@ -182,6 +175,9 @@ $(function(){
           case "image":
             addImage();
             break;
+          case "video":
+            addVideo();
+            break;
         }
         break;
       }
@@ -207,9 +203,9 @@ $(function(){
     	style += '"';
     
       var container = $('<div class="paragraphContainer ui-state-default dragItem" data-type="paragraph">' +
-      					'<div class="edit">' +
-      					'<a name="edit">編輯</a><a name="delete">刪除</a>' +
-      					'</div>' +
+      					'<ul class="tool-b">' +
+      					'<li><a name="edit">編輯</a></li><li><a name="delete">刪除</a></li>' +
+      					'</ul>' +
       					'</div>');
       
       var content = $("#newParagraphContent").val().replace(/\n/g, "<br />");
@@ -234,17 +230,8 @@ $(function(){
     }
   }
 
-  function addImage(){
-    if($("#brief_photo_image").val()){
-      $("#new_brief_photo").submit();
-    }
-    else{
-      alert("<%= t("admin.upload.miss_tip") %>");
-    }
-    
-  }  
-  
-  $("#newVideo").click(function(event) {
+  function addVideo() {
+	  
     if( $("#newVideoContent").val() ){
       var container = $('<div class="paragraphContainer ui-state-default dragItem" data-type="video"></div>');
       var code = getYoutubeCode( $("#newVideoContent").val());
@@ -258,11 +245,18 @@ $(function(){
 
       saveArticle();
     }
-    else{
-      alert("<%= t("admin.empty_tip") %>");
+  }
+
+  function addImage(){
+    if($("#brief_photo_image").val()){
+      $("#new_brief_photo").submit();
     }
-    event.preventDefault();
-  });
+    else{
+      alert("<%= t("admin.upload.miss_tip") %>");
+    }
+    
+  }  
+  
 
   //validate image upload
   $("#new_brief_photo").submit(function(){
@@ -324,13 +318,13 @@ $(function(){
   bindEdit();
   function bindEdit(){
     /* edit or delete the paragraphs */
-  $("div.edit a[name=edit]").click(function(event){
+  $("ul.tool-b li a[name=edit]").click(function(event){
     if(!editingFlag){
       editingFlag = true;
       $(".buttonArea").hide();
-      var paragraph = $(this).parent().next();
-
-      $(this).parent().parent().append("<div id='editDiv'><textarea id='editedContent' rows='4' cols='50'></textarea><br /><label /><br /><input type='button' id='editFinish' value='完成修改'/><input type='button' id='editCancel' value='取消'/></div>");
+      var paragraph = $(this).parent().parent().next();
+      
+      $(this).parent().parent().parent().append("<div id='editDiv'><textarea id='editedContent' name='textarea' style='overflow: hidden; word-wrap: break-word; height: 35px;'></textarea><ul class='tool-a'><li><a id='editFinish'>完成修改</a></li><li><a id='editCancel'>取消</li></div></div>");
 
       //avoid content in textbox can't not be editted due to the using of jquery sortable
       event.stopImmediatePropagation();
@@ -350,7 +344,7 @@ $(function(){
       $("#editFinish").click(function(){
         if($("#editedContent").val()){
           var content = (contentLink? '<a target="_blank" href="'+contentLink.aLink+'">': "" )+ nl2br($("#editedContent").val())+ (contentLink? '</a>': "");
-          $(this).parent().prev().html(content).show();
+          $(this).parent().parent().parent().prev().html(content).show();
           $("#editDiv").remove();
           saveArticle();
           editingFlag = false;
@@ -362,7 +356,7 @@ $(function(){
       });
 
       $("#editCancel").click(function(){
-        $(this).parent().prev().show();
+        $(this).parent().parent().prev().show();
         $("#editDiv").remove();
         editingFlag = false;
         $(".buttonArea").show();
@@ -370,8 +364,8 @@ $(function(){
     }
   });
 
-  $("div.edit a[name=delete]").click(function(){
-    $(this).parent().parent().remove();
+  $("ul.tool-b li a[name=delete]").click(function(){
+    $(this).parent().parent().parent().remove();
     saveArticle();
   });
   }
@@ -425,6 +419,7 @@ $(function(){
         o.dataType = 'json';
       },
       complete: function(XMLHttpRequest, textStatus) {
+      	console.log('save complete');
       }
     });
   }
@@ -442,7 +437,7 @@ $(function(){
 
           if(JSON.stringify(paragraph.type)=='"paragraph"')
           {
-            article = "<div class='paragraphContainer ui-state-default dragItem' data-type='paragraph'><div class='edit'><a name='edit'>編輯</a><a name='delete'>刪除</a></div><p class='"+paragraph.cssclass+"' style = ' font-size: "+paragraph.fontSize+"; color: "+paragraph.color+"'>";
+            article = "<div class='paragraphContainer ui-state-default dragItem' data-type='paragraph'><ul class='tool-b'><li><a name='edit'>編輯</a></li><li><a name='delete'>刪除</a></li></ul><p class='"+paragraph.cssclass+"' style = ' font-size: "+paragraph.fontSize+"; color: "+paragraph.color+"'>";
             if(paragraph.link){
               article += "<a target='_blank' href='"+paragraph.link+"'>"+jsonReplace(JSON.stringify(paragraph.content)).replace(/\\n/g, "<br />")+"</a></p></div>";
             }
@@ -452,9 +447,9 @@ $(function(){
           }
           else if(JSON.stringify(paragraph.type)=='"image"')
           {
-            article = "<div  class='paragraphContainer ui-state-default dragItem' data-type='image' data-photo_id=\"" + paragraph.id + "\"><div class='edit'><a href='/admin/categories/<%= params[:category_id]%>/briefs/<%= params[:id]%>/deletePhoto/" + paragraph.id + "' data-method='delete' rel='nofollow' data-remote='true'>刪除</a></div><img alt=" + JSON.stringify(paragraph.id) + " src=" + JSON.stringify(paragraph.path) + " title=" + JSON.stringify(paragraph.id) + " /></div>";
+            article = "<div  class='paragraphContainer ui-state-default dragItem' data-type='image' data-photo_id=\"" + paragraph.id + "\"><ul class='tool-b'><li><a href='/admin/categories/<%= params[:category_id]%>/briefs/<%= params[:id]%>/deletePhoto/" + paragraph.id + "' data-method='delete' rel='nofollow' data-remote='true'>刪除</a></li></ul><img alt=" + JSON.stringify(paragraph.id) + " src=" + JSON.stringify(paragraph.path) + " title=" + JSON.stringify(paragraph.id) + " /></div>";
           } else if (JSON.stringify(paragraph.type)=='"video"') {
-	          article = "<div  class='paragraphContainer ui-state-default dragItem' data-type='video' data-code=\"" + paragraph.code + "\"><div class='edit'><a name='delete'>刪除</a></div><iframe width=\"480\" height=\"290\" data-code=\"" + paragraph.code + "\" src=\"http://www.youtube.com/embed/" + paragraph.code+ "\" frameborder=\"0\" allowfullscreen></iframe></div>";
+	          article = "<div  class='paragraphContainer ui-state-default dragItem' data-type='video' data-code=\"" + paragraph.code + "\"><ul class='tool-b'><li><a name='delete'>刪除</a></li></ul><iframe width=\"480\" height=\"290\" data-code=\"" + paragraph.code + "\" src=\"http://www.youtube.com/embed/" + paragraph.code+ "\" frameborder=\"0\" allowfullscreen></iframe></div>";
 	      }
 
 
@@ -503,7 +498,6 @@ $(function(){
     if(!submit){
       $("#formerror").append("<p>請輸入文章標題</p>");
     }
-
     return submit;
   });
 

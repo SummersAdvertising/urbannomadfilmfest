@@ -57,7 +57,7 @@ class BriefsController < ApplicationController
   # PUT /briefs/1.json
   def update
     @brief = Brief.find(params[:id])
-
+    
     respond_to do |format|
       if @brief.update_attributes(params[:brief])
         format.html { redirect_to @brief, notice: 'Brief was successfully updated.' }
