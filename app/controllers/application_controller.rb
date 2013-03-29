@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
   
   def location
     
+    I18n.t :missing, :default => '{Not here}'
+    
   	if params[ :locale ]
   		I18n.locale = params[ :locale ]
   	end

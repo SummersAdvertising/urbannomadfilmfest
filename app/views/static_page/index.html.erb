@@ -1,60 +1,174 @@
+<!doctype html>
+<html>
+<head>
+<!--[if lt IE 9]>
+<script src="js/html5.js"></script>
+<![endif]-->
+<meta charset="utf-8">
+<title>城市遊牧影展│URBANNOMAD FILM FEST</title>
+<link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/index.css">
+<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+
+  <%= stylesheet_link_tag    "common", :media => "all" %>
+  <%= stylesheet_link_tag    "index", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  
+</head>
+
 <body>
-  <div>
-    <div class="main">
-      <div class="boxTop">
-        <div class="index_menu">
-          <ul>
-            <li class="about"><a href="/intro" target="_self" title="果園簡介">果園簡介</a></li>
-            <li class="product"><a href="/product" target="_self">產品介紹</a>
-              <ul>
-                <a href="/product?openDiv=peach" title="水蜜桃"><li class="peach">水蜜桃</li></a>
-                <a href="/product?openDiv=pear" title="梨"><li class="pear">梨</li></a>
-                <a href="/product?openDiv=persimmon" title="甜柿"><li class="persimmon">甜柿</li></a>
-              </ul>
-            </li>
-            <li class="buy"><a href="/orders" target="_self" title="線上訂購">線上訂購</a></li>
-            <li class="message"><a href="/questions" target="_self" title="留言板">留言板</a></li>
-          </ul>
+<header>
+  <h1><a href="index.html">城市遊牧影展│URBANNOMAD FILM FEST</a></h1>
+  <nav>
+    <ul>
+      <li><a href="index.html" id="nav-home" class="ablock">home</a></li>
+      <li><a href="#" class="atext">English</a></li>
+      <li><a class="atext">/</a></li>
+      <li><a href="#" class="atext">中文</a></li>
+      <li><a href="http://www.facebook.com/UrbanNomad.tw" target="_blank" id="nav-fb" class="ablock">
+        <div class="flipper">
+          <div class="front"> facebook </div>
+          <div class="back"> </div>
         </div>
-        <div class="productArea">
-          <div id="fruitArea">
-            <div class="slides">
-              <ul>
-                <li>
-                  <a href="/product?openDiv=peach" target="_self" title="水蜜桃"><img src="images/fruit1.jpg" alt="華新果園水果-水蜜桃" /></a>
-                  <div><img src="images/fruit-word1.png" width="178" height="83" alt="愛情的滋味-華新果園水果-水蜜桃"/><br  />
-                    果香濃郁、甜美多汁<br/></div>
-                </li>
-                <li><a href="/product?openDiv=pear#pear-3" target="_self" title="雪梨"><img src="images/fruit2.jpg" alt="華新果園水果-雪梨" /></a>
-          <div><img src="images/fruit-word2.png" width="178" height="83" alt="下了一場梨山雪-華新果園水果-雪梨"/><br  />
-            體型、重量、甜度或口感， <br  />
-            皆為梨中之王</div>
-        </li>
-				<li><a href="/product?openDiv=persimmon" target="_self" title="甜柿"><img src="images/fruit3.jpg" alt="華新果園水果-甜柿" /></a>
-          <div><img src="images/fruit-word3.png" width="178" height="83" alt="只留住青春的甘甜-華新果園水果-甜柿"/><br  />
-            無澀味，獨留色香味 <br  /></div>
-        </li>
-			</ul>
-		</div>
-		<a href="#" class="prev">&lt;</a>
-		<a href="#" class="next">&gt;</a>
-    </div>
-              </div>
-              <div class="mainTitle"><img src="images/main_title.gif" width="357" height="442" alt="梨山華新果園-水果細心栽培，綠肥作物-嚴格把關，無農藥殘留之虞慮"/></div>
-              <div class="farmer"><img src="images/farmer.png" width="200" height="370" /></div>
+        </a></li>
+      <li><a href="#" id="nav-04" class="ablock">
+        <div class="flipper">
+          <div class="front"> 座談會 </div>
+          <div class="back"> </div>
         </div>
-    </div>
-  <div class="boxBottom">
-  		<h1>最新消息：<span><a href="/news" title="更多消息">More...</a></span></h1>
-        <div class="point"></div>
-        <div class="newsArea">
-            <ul>
-            	<% @news.each do |news| %>
-              <% if(!news.newcreate) %>
-                <li><%= news.created_at.strftime("%Y/%m/%d") %>： <%= link_to news.name, news %></li>
-              <% end %>
-              <% end %>
-            </ul>
+        </a></li>
+      <li><a href="#" id="nav-03" class="ablock">
+        <div class="flipper">
+          <div class="front"> 檔期表 </div>
+          <div class="back"> </div>
         </div>
+        </a></li>
+      <li><a href="#" id="nav-02" class="ablock">
+        <div class="flipper">
+          <div class="front"> 短片 </div>
+          <div class="back"> </div>
+        </div>
+        </a></li>
+      <li><a href="#" id="nav-01" class="ablock">
+        <div class="flipper">
+          <div class="front"> 長片 </div>
+          <div class="back"> </div>
+        </div>
+        </a></li>
+    </ul>
+  </nav>
+</header>
+<section id="main">
+  <aside>
+    <ul>
+      <li><a href="http://www.designersweek.tw/index.html" id="sp-01" target="_blank"></a></li>
+      <li><a href="http://www.corecultural.com/" id="sp-02" target="_blank"></a></li>
+      <li><a href="http://www.optoma.com.tw/home/default.aspx?" id="sp-03" target="_blank"></a></li>
+      <li><a href="http://www.springscream.com/" id="sp-04" target="_blank"></a></li>
+      <li><a href="http://urbannomadfilmfest.blogspot.tw/p/blog-page_14.html" id="sp-05" target="_blank"></a></li>
+      <li><a href="http://www.kgbburgers.com/" id="sp-06" target="_blank"></a></li>
+      <li><a href="http://www.wildatheart.org.tw/" id="sp-07" target="_blank"></a></li>
+      <li><a href="http://www.petshopsgirl.com/blog/" id="sp-08" target="_blank"></a></li>
+      <li><a href="http://www.filmarts.org.tw/" id="sp-09" target="_blank"></a></li>
+      <li><a href="http://tofu.pixnet.net/blog" id="sp-10" target="_blank"></a></li>
+      <li><a href="http://www.gigguide.tw/" id="sp-11" target="_blank"></a></li>
+      <li><a href="http://www.taiwanease.com/classifieds/?src=taiwanted" id="sp-12" target="_blank"></a></li>
+    </ul>
+    <div id="summer"> 
+      <a href="http://www.summers.com.tw/" target="_blank">網頁製作由<br>夏天廣告贊助</a> </div>
+  </aside>
+  <article>
+    <div class="movie">
+    <a href="#">
+      <div class="post"><img src="<%= image_path("movie-01.jpg") %>" width="207" height="304"></div>
+      <!--post-->
+      <div class="info">
+        <hgroup>
+          <h3>台灣牡蠣</h3>
+          <h4>THE TAIWAN OYSTER</h4>
+        </hgroup>
+        <p> 美國 / 2012 / 105 分鐘<br>
+          英文 / 中文字幕<br>
+          導演：Mark Jarrett </p>
+      </div>
+      <!--info-->
+      </a> 
     </div>
-  </body>
+    <!--movie-->
+    <div class="movie">
+    <a href="#">
+      <div class="post"><img src="<%= image_path("movie-01.jpg") %>" width="207" height="304"></div>
+      <!--post-->
+      <div class="info">
+        <hgroup>
+          <h3>台灣牡蠣</h3>
+          <h4>THE TAIWAN OYSTER</h4>
+        </hgroup>
+        <p> 美國 / 2012 / 105 分鐘<br>
+          英文 / 中文字幕<br>
+          導演：Mark Jarrett </p>
+      </div>
+      <!--info-->
+      </a> 
+    </div>
+    <!--movie-->
+    <div class="movie">
+    <a href="#">
+      <div class="post"><img src="<%= image_path("movie-01.jpg") %>" width="207" height="304"></div>
+      <!--post-->
+      <div class="info">
+        <hgroup>
+          <h3>台灣牡蠣</h3>
+          <h4>THE TAIWAN OYSTER</h4>
+        </hgroup>
+        <p> 美國 / 2012 / 105 分鐘<br>
+          英文 / 中文字幕<br>
+          導演：Mark Jarrett </p>
+      </div>
+      <!--info-->
+      </a> 
+    </div>
+    <!--movie-->
+    <div class="movie">
+    <a href="#">
+      <div class="post"><img src="<%= image_path("movie-01.jpg") %>" width="207" height="304"></div>
+      <!--post-->
+      <div class="info">
+        <hgroup>
+          <h3>台灣牡蠣</h3>
+          <h4>THE TAIWAN OYSTER</h4>
+        </hgroup>
+        <p> 美國 / 2012 / 105 分鐘<br>
+          英文 / 中文字幕<br>
+          導演：Mark Jarrett </p>
+      </div>
+      <!--info-->
+      </a> 
+    </div>
+    <!--movie-->
+    <div class="movie">
+    <a href="#">
+      <div class="post"><img src="<%= image_path("movie-01.jpg") %>" width="207" height="304"></div>
+      <!--post-->
+      <div class="info">
+        <hgroup>
+          <h3>台灣牡蠣</h3>
+          <h4>THE TAIWAN OYSTER</h4>
+        </hgroup>
+        <p> 美國 / 2012 / 105 分鐘<br>
+          英文 / 中文字幕<br>
+          導演：Mark Jarrett </p>
+      </div>
+      <!--info-->
+      </a> 
+    </div>
+    <!--movie--> 
+    
+  </article>
+</section>
+<footer>
+</footer>
+</body>
+</html>

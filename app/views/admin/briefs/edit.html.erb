@@ -17,7 +17,12 @@
         <td valign="middle" class="text"><%= f.file_field :cover %></td>
       </tr>
       <tr>
-        <td valign="middle" class="text">在前台顯示</td><td><input type="checkbox" id="briefFrontshow" /></td>
+        <td valign="middle" class="text">在前台顯示</td><td>
+        <input type="checkbox" id="briefFrontshow" /></td>
+      </tr>
+      <tr>
+        <td valign="middle" class="text"><%= t("admin.brief.intro") %></td>
+        <td><%= f.text_area :intro %></td>
       </tr>
     </table>
     
@@ -449,7 +454,7 @@ $(function(){
           {
             article = "<div  class='paragraphContainer ui-state-default dragItem' data-type='image' data-photo_id=\"" + paragraph.id + "\"><div class='edit'><a href='/admin/categories/<%= params[:category_id]%>/briefs/<%= params[:id]%>/deletePhoto/" + paragraph.id + "' data-method='delete' rel='nofollow' data-remote='true'>刪除</a></div><img alt=" + JSON.stringify(paragraph.id) + " src=" + JSON.stringify(paragraph.path) + " title=" + JSON.stringify(paragraph.id) + " /></div>";
           } else if (JSON.stringify(paragraph.type)=='"video"') {
-	          article = "<div  class='paragraphContainer ui-state-default dragItem' data-type='video' data-type='video' data-code=\"" + paragraph.code + "\"><iframe width=\"480\" height=\"290\" data-code=\"" + paragraph.code + "\" src=\"http://www.youtube.com/embed/" + paragraph.code+ "\" frameborder=\"0\" allowfullscreen></iframe></div>";
+	          article = "<div  class='paragraphContainer ui-state-default dragItem' data-type='video' data-code=\"" + paragraph.code + "\"><div class='edit'><a name='delete'>刪除</a></div><iframe width=\"480\" height=\"290\" data-code=\"" + paragraph.code + "\" src=\"http://www.youtube.com/embed/" + paragraph.code+ "\" frameborder=\"0\" allowfullscreen></iframe></div>";
 	      }
 
 
