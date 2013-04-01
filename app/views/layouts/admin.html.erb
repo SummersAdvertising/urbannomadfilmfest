@@ -16,13 +16,15 @@
 <%= stylesheet_link_tag "alertify", :media => "all" %>
 <%= stylesheet_link_tag "custom", :media => "all" %>
 
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+
 <%= stylesheet_link_tag "adminRWD/mobile", :media => "screen and (max-width: 543px)" %>
 <%= stylesheet_link_tag "adminRWD/tablet", :media => "screen and (min-width: 544px) and (max-width: 896px)" %>
 <%= stylesheet_link_tag "adminRWD/desktop", :media => "screen and (min-width: 897px)" %>
 
 <title><%= t("admin.page_title") %></title>
 
-<%= javascript_include_tag "application" %>
+<%= javascript_include_tag "application", :media => "all" %>
 <%= csrf_meta_tags %>
 
 <script>
@@ -87,10 +89,10 @@ $(function(){
 
 <body>
 <header _height="none">
-  <section id="top"> <a id="nav-ctrl"><img src="images/nav.png"></a>
-    <div id="lang"> <a href="#"><img src="images/tw.png"> 繁中</a> <a href="#"><img src="images/us.png"> English</a> </div>
+  <section id="top"> <a id="nav-ctrl"><img src="<%= image_path("nav.png") %>"></a>
+    <div id="lang"> <a href="#"><img src="<%= image_path("tw.png") %>"> 繁中</a> <a href="#"><img src="<%= image_path("us.png") %>"> English</a> </div>
     <h1><a href="#">遊牧影展後台管理系統</a></h1>
-    <aside> <a id="aside-ctrl"><img src="images/set.png"></a>
+    <aside> <a id="aside-ctrl"><img src="<%= image_path("set.png") %>"></a>
       <div id="aside-box"> 
       <%if session[:admin]%>
       你好，<%= session[:admin]%>！<a href="/admin/edit">修改個人資料</a><a href="/admin/log_out">登出</a><a href="<%= root_url %>">返回首頁</a> 

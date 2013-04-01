@@ -6,7 +6,7 @@ class Admin::BriefsController < ApplicationController
   def index
   	@categories = Category.all
   	
-    @briefs = Brief.order('created_at DESC').page(params[:page]).per(10)
+    @briefs = @category.briefs.order('created_at DESC').page(params[:page]).per(10)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -18,7 +18,7 @@ class Admin::BriefsController < ApplicationController
   # GET /brief/1.json
   def show
     @brief = Brief.find(params[:id])
-
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @brief }
@@ -64,8 +64,8 @@ class Admin::BriefsController < ApplicationController
   # POST /brief
   # POST /brief.json
   def create
-    @brief = Brief.new(params[:brief])
-    @brief.newcreate = true
+    @brief = @category.briefs.build(params[:brief])
+    @brief.new_create = true
 
     respond_to do |format|
       if @brief.save
@@ -82,7 +82,6 @@ class Admin::BriefsController < ApplicationController
   # PUT /brief/1.json
   def update
     @brief = Brief.find(params[:id])
-
 
     respond_to do |format|
       if @brief.update_attributes(params[:brief])
@@ -102,14 +101,14 @@ class Admin::BriefsController < ApplicationController
     @brief.destroy
 
     respond_to do |format|
-      format.html { redirect_to admin_brief_index_path }
+      format.html { redirect_to admin_category_briefs_path( @category ) }
       format.json { head :no_content }
     end
   end
   
 private
   def get_category
-  	@category = Category.find( params[ :category_id ] )  	
+  	@category = Category.where( "id = '#{params[ :category_id ]}' OR namehash = '#{params[ :category_id ]}'" ).first
   end
   
 end

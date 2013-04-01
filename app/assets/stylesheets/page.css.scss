@@ -4,16 +4,18 @@ article{padding:18px 40px 0 40px}
 .prev,.next,.post{float:left}
 .prev a,.next a{display:block;width:57px;height:377px;
 -webkit-transition:all ease .3s;-moz-transition:all ease .3s}
-.prev a{background:url(../images/prev.jpg) 0 center no-repeat}
-.next a{background:url(../images/next.jpg) 0 center no-repeat}
+.prev a{background:image-url("prev.jpg") 0 center no-repeat}
+.next a{background:image-url("next.jpg") 0 center no-repeat}
 .prev a:hover,.next a:hover{position:relative}
 .prev a:hover{right:2px}
 .next a:hover{left:2px}
 
-.post{width:599px;height:377px;background:url(../images/frame.jpg) center 0 no-repeat;text-align:center;padding:30px 0 0 0}
+.post{width:599px;height:377px;text-align:center}
 
-article hgroup{color:#a6ce39;font:900 58px "微軟正黑體"}
+article hgroup{color:#a6ce39;font:900 58px "微軟正黑體",Arial, Helvetica, sans-serif}
 article p{padding:10px 0;line-height:1.7em}
-.font-blue{font:300 14px "微軟正黑體";color:#6fa8dc}
-.font-red{font:300 14px "微軟正黑體";color:#ff0000}
-.font-pink{font:900 24px "微軟正黑體";color:#ff00ef}
+.font-blue{font:300 14px "微軟正黑體",Arial, Helvetica, sans-serif;color:#6fa8dc}
+.font-red{font:300 14px "微軟正黑體",Arial, Helvetica, sans-serif;color:#ff0000}
+.font-pink{font:900 24px "微軟正黑體",Arial, Helvetica, sans-serif;color:#ff00ef}
+
+footer{padding:50px 0 0 205px}

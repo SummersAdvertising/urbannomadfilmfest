@@ -1,28 +1,163 @@
-<div id="main" class="main-sign">
-    <h2><img src="/images/man.png" width="16" height="16" /> 使用者登入</h2>
-    <%= form_for(@admin, :url => admin_loginCheck_path(@admin, :locale => I18n.locale)) do |f| %>
-    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-      <tr>
-        <td colspan="2" align="left">帳號<br>
-          <%= f.text_field :username, :autocomplete => "off" %></td>
-      </tr>
-      <tr>
-        <td colspan="2" align="left">密碼<br>
-          <%= f.password_field :password, :autocomplete => "off" %></td>
-      </tr>
-    </table>
-    <% end %>
+<!doctype html>
+<html>
+<head>
+<!--[if lt IE 9]>
+<script src="js/html5.js"></script>
+<link rel="stylesheet" href="css/desktop.css">
+<![endif]-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+<meta name="Robots" content="index,follow"/>
+<meta http-equiv="content-language" content="zh-TW" />
+<title>遊牧影展後台管理系統</title>
 
+<%= stylesheet_link_tag "reset", :media => "all" %>
+<%= stylesheet_link_tag "admin", :media => "all" %>
+<%= stylesheet_link_tag "alertify", :media => "all" %>
+<%= stylesheet_link_tag "custom", :media => "all" %>
+
+<%= stylesheet_link_tag "adminRWD/mobile", :media => "screen and (max-width: 543px)" %>
+<%= stylesheet_link_tag "adminRWD/tablet", :media => "screen and (min-width: 544px) and (max-width: 896px)" %>
+<%= stylesheet_link_tag "adminRWD/desktop", :media => "screen and (min-width: 897px)" %>
+
+<title><%= t("admin.page_title") %></title>
+
+<%= javascript_include_tag "application", :media => "all" %>
+<%= csrf_meta_tags %>
+
+<script>
+$(document).ready(function() {	
+	$('#aside-ctrl').click(function(event) { 
+   /* aside-box 顯示後,綁上點擊document中的物件隱藏 aside-box 的事件 */
+    $('#aside-box').fadeIn(function(){
+      $(document).click(function() {
+        $('#aside-box').fadeOut();
+        $(document).unbind();
+      });
+    });
+
+    event.preventDefault();
+	});  
+	
+  var isNavOpen = false;
+	$('#nav-ctrl').click(function() {
+    $('#nav-ctrl').unbind();
+    showNav();
+	});
+
+  function showNav(){
+    var leftPosition;
+
+    switch(isNavOpen){
+      case true:
+        leftPosition = 0;
+        break;
+      case false:
+        leftPosition = 150;
+        break;
+    }
+    
+    $('article').animate({ left: leftPosition }, 1000, 'easeOutQuad', function() {
+      $('#nav-ctrl').click(function() {
+        $('#nav-ctrl').unbind();
+        showNav();
+      });
+    });
+
+    isNavOpen = isNavOpen? false : true;
+  }
+});
+</script>
+<script>
+$(function(){	
+	var _showTab = 0;
+	var $defaultLi = $('.tab li').eq(_showTab).addClass('active');
+	$($defaultLi.find('a').attr('href')).siblings().hide();
+ 	$('.tab li').click(function() {		
+		var $this = $(this),
+			_clickTab = $this.find('a').attr('href');		
+		$this.addClass('active').siblings('.active').removeClass('active');		
+		$(_clickTab).stop(false, true).fadeIn().siblings().hide(); 
+		return false;
+		}).find('a').focus(function(){
+			this.blur();
+	});
+});
+</script>
+
+<body>
+<header _height="none">
+  <section id="top"> <a id="nav-ctrl"><img src="<%= image_path("nav.png") %>"></a>
+    <div id="lang"> <a href="#"><img src="<%= image_path("tw.png") %>"> 繁中</a> <a href="#"><img src="<%= image_path("us.png") %>"> English</a> </div>
+    <h1><a href="#">遊牧影展後台管理系統</a></h1>
+    <aside> <a id="aside-ctrl"><img src="<%= image_path("set.png") %>"></a>
+      <div id="aside-box"> 
+      <%if session[:admin]%>
+      你好，<%= session[:admin]%>！<a href="/admin/edit">修改個人資料</a><a href="/admin/log_out">登出</a><a href="<%= root_url %>">返回首頁</a> 
+      <% end %>
+      </div>
+    </aside>
+  </section>
+  <!--top--> 
+</header>
+<div class="login">
+<section id="main" _height="auto">
+<section id="vert">
+  <article>
+  <section class="hgroup">
+      <h2><img src="<%= image_path("set.png") %>" width="16" height="16"> 登入</h2>
+    </section>
+    <!--hgroup-->
+    <section class="text text-edit">
+    <%= form_for(@admin, :url => admin_loginCheck_path(@admin, :locale => I18n.locale)) do |f| %>
+    <div class="one">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <th valign="top">帳號</th>
+            <td><%= f.text_field :username, :autocomplete => "off" %></td>
+          </tr>
+        </table>
+      </div>
+      <div class="one">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <th valign="top">密碼</th>
+            <td><%= f.password_field :password, :autocomplete => "off" %></td>
+          </tr>
+        </table>
+      </div>
+      </section>
     <% if session[:notice] %>
     <p class='notice'>請輸入正確的帳號及密碼</p>
     <% end %>
+    
+    <% end %>
+    <!--text-->
+     <section class="button">
+    <a href="#" id="btnLogin"><img src="<%= image_path("log.png") %>">登入</a>    
+    </section>
+    <!--button--> 
+  </article>
+</section><!--vert-->
 
-    <div class="button" id="btnLogin"><a href="#"><img src="/images/login.png">登入</a></div>
-  </div>
-  <!--main--> 
+
+<script>
+  $(function() {
+    $( ".preview" ).sortable({
+      placeholder: "highlight"
+    });
+    $( ".preview" ).disableSelection();	
+	
+  });
+</script>
 
 <script type="text/javascript">
 $("#btnLogin").click(function(){
+  if (!$('#admin_username').val().length || !$('#admin_password').val().length) {
+	
+	Alertify.log.error("帳號或密碼不得空白，請重新輸入");		
+	return;  
+  }
   $("form").submit();
 });
 
@@ -32,3 +167,10 @@ $("#admin_password").keydown(function(event){
   }
 });
 </script>
+
+</section>
+</div>
+<!--main-->
+<footer _height="none"> Copyright © <a href="http://www.summers.com.tw/" target="_blank">Summers</a> </footer>
+</body>
+</html>

@@ -14,7 +14,7 @@ class AdminController < ApplicationController
     @admin.destroy
 
     respond_to do |format|
-      format.html { redirect_to admin_showAdmins_path }
+      format.html { redirect_to admin_showAdmins_path( :locale => I18n.locale ) }
     end
   end
 
@@ -33,10 +33,10 @@ class AdminController < ApplicationController
         flash[:notice] = 'successfully updated.'
         session[:admin] = @admin.name
 
-        format.html { redirect_to admin_edit_path, :notice =>"successfully updated." }
+        format.html { redirect_to admin_edit_path( :locale => I18n.locale ), :notice =>"successfully updated." }
         format.json { head :no_content }
       else
-        format.html { redirect_to admin_edit_path }
+        format.html { redirect_to admin_edit_path( :locale => I18n.locale ) }
         format.json { render json: @admin.errors, status: :unprocessable_entity }
       end
     end
@@ -50,19 +50,24 @@ class AdminController < ApplicationController
       if !@admin.save
         flash[:error] = "username is existed."
       end
-      format.html { redirect_to admin_showAdmins_path }
+      format.html { redirect_to admin_showAdmins_path( :locale => I18n.locale ) }
     end
 
   end
 
   def log_in
     @admin = Admin.new
+    
+    respond_to do | format |
+    	format.html{ render :layout => false }
+    end
+    
   end
 
   def loginCheck
   	@admin = Admin.new(params[:admin])
     @dbData = Admin.where("username = ?", @admin.username).first
-
+    
     if(@dbData && pswordCheck(@admin.password, @dbData.password))
       session[:admin] = @dbData.name
       session[:adminID] = @dbData.id
@@ -70,15 +75,15 @@ class AdminController < ApplicationController
     else
       session[:notice] = "wrong password"
     end
-
-    redirect_to admin_path
+    
+    redirect_to admin_path( :locale => I18n.locale )
     
   end
 
 
   def log_out
     session[:admin] = nil
-    redirect_to admin_path
+    redirect_to admin_path( :locale => I18n.locale )
   end
 
   private

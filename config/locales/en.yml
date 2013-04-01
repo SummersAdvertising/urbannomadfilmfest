@@ -4,4 +4,6 @@
 
 
 en:
-  hello: "Hello world"
+  date:
+    format:
+      default: "%d-%m-%Y"

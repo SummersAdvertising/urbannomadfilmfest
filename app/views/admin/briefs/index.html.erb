@@ -1,44 +1,50 @@
-<div id="main" class="right">
-  <div class="button">
+<div id="main" class="right">    
+  <article>
+  
+  <section class="category">
+      <ul>
+        <li <%= 'class="active"'.html_safe if @category.namehash == 'full' %>><%= link_to '長片類' ,admin_category_briefs_path('full', :locale => I18n.locale ) %></li>
+        <li <%= 'class="active"'.html_safe if @category.namehash == 'short' %>><%= link_to '短片類', admin_category_briefs_path('short', :locale => I18n.locale) %></li>
+      </ul>
+    </section>
+    <!--category-->
+  <section class="button">
     <%= link_to image_tag("/images/add.png")+t("admin.brief.new_brief"), admin_category_briefs_path(@category, :locale => I18n.locale), :method => :post %>
-  </div>
-  <div class="main-list">
-    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-  	  <tr>
-	  	  <td colspan="4">
-		  	  <% @categories.each do | category | %>
-		  	  <%= link_to category.title, admin_category_briefs_path( category, :locale => I18n.locale ) %>
-		  	  <% end %>
-	  	  </td>
-  	  </tr>
-      <tr class="main-list-title">
-        <th>Name</th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-
+  </section>
+    <!--button-->
+    <section class="list">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      
       <% if(@briefs.blank?) %>
       <tr>
         <td colspan="4"><%= t("admin.brief.no_brief_exists") %></td>
-      </tr>
+      </tr>      
+      <% else %>
+		<tr>
+			<th align="center" class="date">日期</th>
+			<th align="left" class="name">標題</th>
+			<th align="center" class="edit">編輯</th>
+			<th align="center" class="delete">刪除</th>
+		</tr>
+		<% @briefs.each do | brief | %>      
+		<tr>
+			<td align="center"><%= brief.created_at.to_s(:date) %></td>
+			<td align="left"><%= link_to brief.name, admin_category_brief_path(@category, brief, :locale => I18n.locale) %></td>
+			<td align="center" class="edit"><%= link_to 'edit', edit_admin_category_brief_path(@category, brief, :locale => I18n.locale) %></td>
+			<td align="center" class="delete"><%= link_to image_tag("delete.png"), admin_category_brief_path(@category, brief, :locale => I18n.locale), method: :delete, data: { confirm: t("admin.brief.delete_confirm") } %></td>
+		</tr>
+	      <% end %>
+      
       <% end %>
 
-      <% @briefs.each do |brief| %>
-      <tr>
-        <td><%= brief.name %></td>
-        <td><%= link_to 'Show', admin_category_brief_path(@category, brief, :locale => I18n.locale) %></td>
-        <td><%= link_to 'Edit', edit_admin_category_brief_path(@category, brief, :locale => I18n.locale) %></td>
-        <td><%= link_to 'Destroy', admin_category_brief_path(@category, brief, :locale => I18n.locale), method: :delete, data: { confirm: t("admin.brief.delete_confirm") } %></td>
-      </tr>
-      <% end %>
-    </table>
-  </div>
-</div>
-<!--main--> 
+      </table>
+    </section>
+    <!--list-->
+  </article>
+  
 
 <script type="text/javascript">
 $(document).ready(function(){
-  $("#briefs").addClass("active");
+  $("#nav-1").addClass("active");
 });
 </script>

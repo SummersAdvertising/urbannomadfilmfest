@@ -1,25 +1,63 @@
-<p id="notice"><%= notice %></p>
+<%= stylesheet_link_tag "page", :media => "all" %>
+<div id="turntable">
+  <div class="prev"><a href="<%= category_brief_path( :category_id => @category.namehash, :id => @prev.id, :locale => I18n.locale ) %>"></a></div>
+  <div class="post"><img src="<%= image_path(@brief.inner_photo.show) %>" width="540" height="359"></div>
+  <div class="next"><a href="<%= category_brief_path( :category_id => @category.namehash, :id => @next.id, :locale => I18n.locale ) %>"></a></div>
+</div>
+<hgroup>
+  <h3><%= @brief.name %></h3>
+  <h4><%= @brief.en_name %></h4>
+</hgroup>
+<p><%= @brief.intro.sub(/\n/, "<br>").html_safe if !@brief.intro.nil? %> &nbsp;     </p>
 
-<p>
-  <b>Name:</b>
-  <%= @brief.name %>
-</p>
-
-<p>
-  <b>Content:</b>
-  <%= @brief.content %>
-</p>
-
-<p>
-  <b>New create:</b>
-  <%= @brief.new_create %>
-</p>
-
-<p>
-  <b>Status:</b>
-  <%= @brief.status %>
-</p>
+<input id="brief_content" style="display:none;" type="text" value="<%=@brief.content%>">
+<p id="articleContent"></p>
 
 
-<%= link_to 'Edit', edit_brief_path(@brief) %> |
-<%= link_to 'Back', briefs_path %>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  $("#briefes").addClass("active");
+  showContent();
+
+  function showContent(){
+    if($("#brief_content").val())
+    {
+      var obj = JSON.parse($("#brief_content").val());
+      var article = "";
+      for(i=0;i<obj.article.length;i++)
+      {
+        var paragraph = obj.article[i];
+
+         if(JSON.stringify(paragraph.type)=='"paragraph"')
+        {
+          article = "<p class='"+paragraph.cssclass+"' '>";
+
+          if(paragraph.link){
+            article += "<a target='_blank' href='"+paragraph.link+"'>"+jsonReplace(JSON.stringify(paragraph.content)).replace(/\\n/g, "<br />")+"</a></p>";
+          }
+          else{
+            article += jsonReplace(JSON.stringify(paragraph.content)).replace(/\\n/g, "<br />")+"</p>";
+          }
+        }
+        else if(JSON.stringify(paragraph.type)=='"image"')
+        {
+          article = "<img alt=" + JSON.stringify(paragraph.id) + " src=" + JSON.stringify(paragraph.path) + " title=" + JSON.stringify(paragraph.id) + " />";
+        }
+        else if(JSON.stringify(paragraph.type)=='"linkedimg"')
+        {
+          article = "<a href="+JSON.stringify(paragraph.link)+" target='_blank'><img alt=" + JSON.stringify(paragraph.imgid) + " src=" + JSON.stringify(paragraph.imgpath) + " title=" + JSON.stringify(paragraph.imgid) + " /></a>";
+        }
+        else if (JSON.stringify(paragraph.type)=='"video"') {
+          article = "<div  class='paragraphContainer' data-type='video' data-code=\"" + paragraph.code + "\"><iframe width=\"713\" height=\"401\" data-code=\"" + paragraph.code + "\" src=\"http://www.youtube.com/embed/" + paragraph.code+ "\" frameborder=\"0\" allowfullscreen></iframe></div>";
+        }
+        $("#articleContent").append(article);
+      }
+    }
+  }
+
+  function jsonReplace(string){return string.replace(/"([^"]*)"/g, "$1");}
+  
+});
+
+</script>

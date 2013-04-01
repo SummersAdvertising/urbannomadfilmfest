@@ -37,7 +37,7 @@ class MovieCoverUploader < CarrierWave::Uploader::Base
   
   
   version :thumb do
-    process :resize_to_fill => [218, 163]
+    process :resize_to_fill => [207, 304]
   end
 
 

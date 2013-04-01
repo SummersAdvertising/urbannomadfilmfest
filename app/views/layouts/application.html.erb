@@ -1,14 +1,47 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-  <title>Urbannomadfilmfest</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
+<!--[if lt IE 9]>
+<script src="js/html5.js"></script>
+<![endif]-->
+<meta charset="utf-8">
+<title>城市遊牧影展│URBANNOMAD FILM FEST</title>
+	<%= stylesheet_link_tag "reset", :media => "all" %>
+	<%= stylesheet_link_tag "common", :media => "all" %>
+	<%= stylesheet_link_tag t('configs.style'), :media => "all" %>
+	<%= javascript_include_tag "application" %>
+	<%= csrf_meta_tags %>
 </head>
+
 <body>
-
-<%= yield %>
-
+<header>
+  <h1><a href="<%= root_url %>">城市遊牧影展│URBANNOMAD FILM FEST</a></h1>
+  
+  <%= render :partial => "layouts/menu" %>
+</header>
+<section id="main">
+  <aside>
+    <ul>
+      <li><a href="http://www.designersweek.tw/index.html" id="sp-01" target="_blank"></a></li>
+      <li><a href="http://www.corecultural.com/" id="sp-02" target="_blank"></a></li>
+      <li><a href="http://www.optoma.com.tw/home/default.aspx?" id="sp-03" target="_blank"></a></li>
+      <li><a href="http://www.springscream.com/" id="sp-04" target="_blank"></a></li>
+      <li><a href="http://urbannomadfilmfest.blogspot.tw/p/blog-page_14.html" id="sp-05" target="_blank"></a></li>
+      <li><a href="http://www.kgbburgers.com/" id="sp-06" target="_blank"></a></li>
+      <li><a href="http://www.wildatheart.org.tw/" id="sp-07" target="_blank"></a></li>
+      <li><a href="http://www.petshopsgirl.com/blog/" id="sp-08" target="_blank"></a></li>
+      <li><a href="http://www.filmarts.org.tw/" id="sp-09" target="_blank"></a></li>
+      <li><a href="http://tofu.pixnet.net/blog" id="sp-10" target="_blank"></a></li>
+      <li><a href="http://www.gigguide.tw/" id="sp-11" target="_blank"></a></li>
+      <li><a href="http://www.taiwanease.com/classifieds/?src=taiwanted" id="sp-12" target="_blank"></a></li>
+    </ul>
+    <div id="summer"> 
+      <a href="http://www.summers.com.tw/" target="_blank">網頁製作由<br>夏天廣告贊助</a> </div>
+  </aside>
+  <article>
+  	<%= yield %>
+  </article>
+</section>
+<%= render :partial => "layouts/footer" %>
 </body>
 </html>

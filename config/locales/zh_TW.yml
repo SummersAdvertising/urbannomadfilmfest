@@ -1,0 +1,4 @@
+zh_TW:
+  date:
+    format:
+      default: "%d-%m-%Y"

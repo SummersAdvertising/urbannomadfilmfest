@@ -1,83 +1,45 @@
 class BriefsController < ApplicationController
-  # GET /briefs
-  # GET /briefs.json
-  def index
-    @briefs = Brief.all
+  before_filter :get_category
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @briefs }
-    end
-  end
+ def index
+ 	@briefs = @category.briefs.order( 'date DESC' )
+ end
 
   # GET /briefs/1
   # GET /briefs/1.json
   def show
     @brief = Brief.find(params[:id])
-
+    seek_flag = false    
+    
+    @briefs = @category.briefs.where( :status => "enable" ).order( "date DESC" )
+    
+    @briefs.each do | br |
+    	@next = br
+    	@prev = br if @prev.nil?    	
+    	
+    	if br.id == @brief.id
+	    	seek_flag = true
+	    	next
+    	end
+    	
+    	break if seek_flag
+    	
+    	@prev = br
+    	
+    end
+    
+    @next = @briefs.first if @next.id == @brief.id
+    @prev = @briefs.last if @prev.id == @brief.id
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @brief }
     end
   end
-
-  # GET /briefs/new
-  # GET /briefs/new.json
-  def new
-    @brief = Brief.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @brief }
-    end
+  
+private
+  def get_category
+  	@category = Category.where( "id = '#{params[ :category_id ]}' OR namehash = '#{params[ :category_id ]}'" ).first
   end
-
-  # GET /briefs/1/edit
-  def edit
-    @brief = Brief.find(params[:id])
-  end
-
-  # POST /briefs
-  # POST /briefs.json
-  def create
-    @brief = Brief.new(params[:brief])
-
-    respond_to do |format|
-      if @brief.save
-        format.html { redirect_to @brief, notice: 'Brief was successfully created.' }
-        format.json { render json: @brief, status: :created, location: @brief }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @brief.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PUT /briefs/1
-  # PUT /briefs/1.json
-  def update
-    @brief = Brief.find(params[:id])
-    
-    respond_to do |format|
-      if @brief.update_attributes(params[:brief])
-        format.html { redirect_to @brief, notice: 'Brief was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @brief.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /briefs/1
-  # DELETE /briefs/1.json
-  def destroy
-    @brief = Brief.find(params[:id])
-    @brief.destroy
-
-    respond_to do |format|
-      format.html { redirect_to briefs_url }
-      format.json { head :no_content }
-    end
-  end
+  
 end

@@ -3,12 +3,17 @@ Urbannomadfilmfest::Application.routes.draw do
   scope "(:locale)/" do
   	resources :briefs
   	
+  	resources :categories, :except => [:new, :edit, :destroy] do
+		resources :briefs, :only => [:show, :index]
+	end
+
+  	
 	match "/admin/createAdmin" => "admin#createAdmin", :via => :post
 	match "/admin/loginCheck" => "admin#loginCheck", :via => :post
 	match "/admin/update" => "admin#update", :via => :put
 	
 	namespace :admin do
-		get '/' => 'admin#showAdmins'    
+		get '/' => 'categories#index'    
 		get "sign_up", "log_in", "log_out", "edit"
 		
 		match 'showAdmins' => 'admin#showAdmins' 

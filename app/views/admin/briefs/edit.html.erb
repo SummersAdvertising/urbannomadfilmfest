@@ -1,4 +1,4 @@
-  <article>
+<article>
     <section class="hgroup">
       <h2>首頁短文簡介</h2>
     </section>
@@ -8,6 +8,7 @@
 	<div style="display: none;">
 	<%= f.label :name %>
 	<%= f.text_field :name %>
+	<%= f.text_field :status %>
 	
 	
 	<input id="brief_nameOrigin" type="text" value="">
@@ -40,7 +41,29 @@
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
             <th valign="top"><%= t("admin.brief.intro") %></th>
-            <td><%= f.text_area :intro, :placeholder => "請輸入文字" %></textarea></td>
+            <td><%= f.text_area :intro, :placeholder => "請輸入文字" %></td>
+          </tr>
+        </table>
+      </div>
+      <div class="one">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <th valign="top"><%= t("admin.brief.date") %></th>
+            <td><%= f.text_field :date, :placeholder => "請選擇日期", :value => (@brief.date.to_s(:date_slashed) if !@brief.date.nil?) %></td>
+          </tr>
+        </table>
+      </div>
+      <div class="one">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <th valign="top"><%= t("admin.brief.schedule") %></th>
+            <td>
+            	<ul id="brief_schedule" >
+            		<% (0..2).each do | i | %>            		
+	            		<li><input id="brief_schedules" name="brief[schedule][]" placeholder="請輸入播放時間" size="30" type="text" value="<%= @brief.schedule[i] if !@brief.schedule.nil? %>" /></li>
+            		<% end %>
+            	</ul>
+            </td>
           </tr>
         </table>
       </div>
@@ -48,18 +71,34 @@
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
             <th valign="top"><%= t("admin.brief.cover") %></th>
-            <td><%= f.file_field :cover %></td>
+            <td>
+            	<%= image_tag(@brief.cover.thumb) + '<br />'.html_safe if @brief.cover.to_s.size > 0  %>
+            	<%= f.file_field :cover %>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="one">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <th valign="top"><%= t("admin.brief.inner_photo") %></th>
+            <td>
+            	<%= image_tag(@brief.inner_photo.show) + '<br />'.html_safe if @brief.inner_photo.to_s.size > 0  %>
+            	<%= f.file_field :inner_photo %>
+            </td>
           </tr>
         </table>
       </div>
       <div class="one">
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
 		      <tr>
-		        <td valign="middle" class="text">在前台顯示</td><td>
+		        <th valign="middle">在前台顯示</th>
+		        <td>
 		        <input type="checkbox" id="briefFrontshow" /></td>
 		      </tr>
         </table>
       </div>
+	<% end %>
       
     </section>
     <!--text-->
@@ -86,7 +125,7 @@
     
     <div id="main-text-p">
        <select id="newParagraphClass" >         
-         <option value="font-white">-- Default --</option>
+         <option value="font-white" selected="selected">-- Default --</option>
          <option value="font-blue">藍字 / Blue</option>
          <option value="font-red">紅字 / Red</option>
          <option value="font-pink" selected="selected">粉紅 / Pink</option>
@@ -104,7 +143,6 @@
         <div class="edit-text">
           <input id="newVideoContent" class="autogrow" style="width: 320px;" placeholder="<%=t("admin.insert_video_tip")%>" />
         </div>
-        <div class="button" id="newVideo"><a href="#"><img src="<%= image_path("add.png") %>">新增連結</a></div>
         <div id="videoPreview"></div>
       </div>
     </section>
@@ -125,7 +163,6 @@
     </section>
     <!--preview-->
     
-	<% end %>
     <!--button--> 
   </article>
       
@@ -133,16 +170,22 @@
 <script type="text/javascript">
 $(document).ready(function(){
   $("#briefs").addClass("active");
+  /*
+    $( "#brief_schedule li input" ).AnyTime_picker(
+    { format: "%H:%i", labelTitle: "Hora",
+      labelHour: "Hora", labelMinute: "Minuto" });
+      */
+//  $( "#brief_schedule li input" ).datepicker();
+  $( "#brief_date" ).datepicker({ dateFormat: "yy/mm/dd" });
 });
 </script>
 
 <script type="text/javascript">
   var form = "#edit_brief_<%= params[:id]%>";
 
-
   function getYoutubeCode( link ) {
     if ( link != undefined ) {
-      return /[a-zA-Z0-9\?\.\:\/]+v=([a-zA-Z0-9_\-]+)&?.*/.exec(link)[1];
+      return /[a-zA-Z0-9\?\.\:\/&=]+v=([a-zA-Z0-9_\-]+)&?.*/.exec(link)[1];
     }
     return '';
   }
@@ -165,7 +208,7 @@ $(document).ready(function(){
 
   $("#btnAddElement").click(function(event){
     var liList = $("#tab li");
-
+    
     for(var arrayLength = liList.length, i = 0; i<arrayLength; i++){
       if($(liList[i]).hasClass("active")){
         switch($(liList[i]).data("name")){
@@ -249,7 +292,7 @@ $(document).ready(function(){
 
   function addImage(){
     if($("#brief_photo_image").val()){
-      $("#new_brief_photo").submit();
+       $("#new_brief_photo").submit();
     }
     else{
       alert("<%= t("admin.upload.miss_tip") %>");
@@ -299,7 +342,7 @@ $(document).ready(function(){
   }
 
   function newImage(photoID,photoPath){
-    $("#articleContent").append('<div class="paragraphContainer ui-state-default dragItem" data-type="image" data-photo_id="'+ photoID +'"><div class="edit"><a href="/admin/categories/<%= params[:category_id]%>/briefs/<%= params[:id]%>/deletePhoto/' + photoID + '" data-method="delete" rel="nofollow" data-remote="true">刪除</a></div><img src="'+photoPath+'" alt="'+photoID+'" /></div>');
+    $("#articleContent").append('<div class="paragraphContainer ui-state-default dragItem" data-type="image" data-photo_id="'+ photoID +'"><ul class="tool-b"><li><a href="/admin/categories/<%= params[:category_id]%>/briefs/<%= params[:id]%>/deletePhoto/' + photoID + '" data-method="delete" rel="nofollow" data-remote="true">刪除</a></li></ul><img src="'+photoPath+'" alt="'+photoID+'" /></div>');
     $('#new_photo').each (function(){
       this.reset();
     });

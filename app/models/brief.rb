@@ -3,6 +3,8 @@ class Brief < ActiveRecord::Base
   belongs_to :category
   attr_accessible :content, :name, :en_name, :new_create, :status, :cover, :intro, :date, :inner_photo, :schedule
   
+  serialize :schedule
+  
   mount_uploader :cover, MovieCoverUploader
   mount_uploader :inner_photo, InnerPhotoUploader
   

@@ -6,59 +6,18 @@
 <![endif]-->
 <meta charset="utf-8">
 <title>城市遊牧影展│URBANNOMAD FILM FEST</title>
-<link rel="stylesheet" href="css/reset.css">
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/index.css">
-<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
-
-  <%= stylesheet_link_tag    "common", :media => "all" %>
-  <%= stylesheet_link_tag    "index", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-  
+	<%= stylesheet_link_tag "reset", :media => "all" %>
+	<%= stylesheet_link_tag "common", :media => "all" %>
+	<%= stylesheet_link_tag t('configs.style'), :media => "all" %>
+	<%= stylesheet_link_tag "index", :media => "all" %>
+	<%= javascript_include_tag "application" %>
+	<%= csrf_meta_tags %>
 </head>
 
 <body>
 <header>
-  <h1><a href="index.html">城市遊牧影展│URBANNOMAD FILM FEST</a></h1>
-  <nav>
-    <ul>
-      <li><a href="index.html" id="nav-home" class="ablock">home</a></li>
-      <li><a href="#" class="atext">English</a></li>
-      <li><a class="atext">/</a></li>
-      <li><a href="#" class="atext">中文</a></li>
-      <li><a href="http://www.facebook.com/UrbanNomad.tw" target="_blank" id="nav-fb" class="ablock">
-        <div class="flipper">
-          <div class="front"> facebook </div>
-          <div class="back"> </div>
-        </div>
-        </a></li>
-      <li><a href="#" id="nav-04" class="ablock">
-        <div class="flipper">
-          <div class="front"> 座談會 </div>
-          <div class="back"> </div>
-        </div>
-        </a></li>
-      <li><a href="#" id="nav-03" class="ablock">
-        <div class="flipper">
-          <div class="front"> 檔期表 </div>
-          <div class="back"> </div>
-        </div>
-        </a></li>
-      <li><a href="#" id="nav-02" class="ablock">
-        <div class="flipper">
-          <div class="front"> 短片 </div>
-          <div class="back"> </div>
-        </div>
-        </a></li>
-      <li><a href="#" id="nav-01" class="ablock">
-        <div class="flipper">
-          <div class="front"> 長片 </div>
-          <div class="back"> </div>
-        </div>
-        </a></li>
-    </ul>
-  </nav>
+  <h1><a href="<%= root_url %>">城市遊牧影展│URBANNOMAD FILM FEST</a></h1>
+  <%= render :partial => "layouts/menu" %>
 </header>
 <section id="main">
   <aside>
@@ -83,19 +42,32 @@
   
   	<% @briefs.each do | brief | 
 	  	next if brief.status != 'enable'
+	  	Rails.logger.debug " **** Entering debug **** "
+	  	Rails.logger.debug brief.inspect
+	  	Rails.logger.debug " **** End **** "
   	%>  		
 	    <div class="movie">
-	    <a href="#">
-	      <div class="post"><img src="<%= brief.cover %>" width="207" height="304"></div>
+	    <a href="<%= category_brief_path(:category_id => brief.category.namehash, :id => brief.id, :locale => I18n.locale ) %>">
+	      <div class="post"><img src="<%= brief.cover.thumb %>" width="207" height="304"></div>
 	      <!--post-->
 	      <div class="info">
 	        <hgroup>
-	          <h3><%= brief.title %></h3>
-	          <h4><%= brief.en_title %></h4>
+	          <h3><%= brief.name %></h3>
+	          <h4><%= brief.en_name %></h4>
 	        </hgroup>
-	        <p> 美國 / 2012 / 105 分鐘<br>
-	          英文 / 中文字幕<br>
-	          導演：Mark Jarrett </p>
+	        <% if !brief.intro.nil? %>
+	        <p> 
+	        	<%= brief.intro.sub(/\n/, '<br>').html_safe %> 
+	        </p>
+	        <% end %>
+	        
+	        <% if !brief.schedule.nil? %>
+	        <p class="time">
+	        <% brief.schedule.each do | schedule | %>
+	        	<%= schedule  %><br />
+	        <% end %>
+	        </p>
+	        <% end %>
 	      </div>
 	      <!--info-->
 	      </a> 
@@ -103,78 +75,8 @@
   	<% end %>
   
     <!--movie-->
-    <div class="movie">
-    <a href="#">
-      <div class="post"><img src="<%= image_path("movie-01.jpg") %>" width="207" height="304"></div>
-      <!--post-->
-      <div class="info">
-        <hgroup>
-          <h3>台灣牡蠣</h3>
-          <h4>THE TAIWAN OYSTER</h4>
-        </hgroup>
-        <p> 美國 / 2012 / 105 分鐘<br>
-          英文 / 中文字幕<br>
-          導演：Mark Jarrett </p>
-      </div>
-      <!--info-->
-      </a> 
-    </div>
-    <!--movie-->
-    <div class="movie">
-    <a href="#">
-      <div class="post"><img src="<%= image_path("movie-01.jpg") %>" width="207" height="304"></div>
-      <!--post-->
-      <div class="info">
-        <hgroup>
-          <h3>台灣牡蠣</h3>
-          <h4>THE TAIWAN OYSTER</h4>
-        </hgroup>
-        <p> 美國 / 2012 / 105 分鐘<br>
-          英文 / 中文字幕<br>
-          導演：Mark Jarrett </p>
-      </div>
-      <!--info-->
-      </a> 
-    </div>
-    <!--movie-->
-    <div class="movie">
-    <a href="#">
-      <div class="post"><img src="<%= image_path("movie-01.jpg") %>" width="207" height="304"></div>
-      <!--post-->
-      <div class="info">
-        <hgroup>
-          <h3>台灣牡蠣</h3>
-          <h4>THE TAIWAN OYSTER</h4>
-        </hgroup>
-        <p> 美國 / 2012 / 105 分鐘<br>
-          英文 / 中文字幕<br>
-          導演：Mark Jarrett </p>
-      </div>
-      <!--info-->
-      </a> 
-    </div>
-    <!--movie-->
-    <div class="movie">
-    <a href="#">
-      <div class="post"><img src="<%= image_path("movie-01.jpg") %>" width="207" height="304"></div>
-      <!--post-->
-      <div class="info">
-        <hgroup>
-          <h3>台灣牡蠣</h3>
-          <h4>THE TAIWAN OYSTER</h4>
-        </hgroup>
-        <p> 美國 / 2012 / 105 分鐘<br>
-          英文 / 中文字幕<br>
-          導演：Mark Jarrett </p>
-      </div>
-      <!--info-->
-      </a> 
-    </div>
-    <!--movie--> 
-    
   </article>
 </section>
-<footer>
-</footer>
+<%= render :partial => "layouts/footer" %>
 </body>
 </html>
