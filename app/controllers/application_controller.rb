@@ -3,6 +3,10 @@ class ApplicationController < ActionController::Base
   
   before_filter :location
   
+  def default_url_options(options={})  
+    { :locale => I18n.locale }
+  end
+  
   def location
     
     I18n.t :missing, :default => '{Not here}'

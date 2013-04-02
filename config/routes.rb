@@ -1,6 +1,6 @@
 Urbannomadfilmfest::Application.routes.draw do
 
-  scope "(:locale)/" do
+  scope "(:locale)/", :locale => /zh\_TW|en/ do
   	resources :briefs
   	
   	resources :categories, :except => [:new, :edit, :destroy] do

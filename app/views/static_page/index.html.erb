@@ -47,7 +47,7 @@
 	  	Rails.logger.debug " **** End **** "
   	%>  		
 	    <div class="movie">
-	    <a href="<%= category_brief_path(:category_id => brief.category.namehash, :id => brief.id, :locale => I18n.locale ) %>">
+	    <a href="<%= category_brief_path(:category_id => brief.category.namehash, :id => brief.id ) %>">
 	      <div class="post"><img src="<%= brief.cover.thumb %>" width="207" height="304"></div>
 	      <!--post-->
 	      <div class="info">
