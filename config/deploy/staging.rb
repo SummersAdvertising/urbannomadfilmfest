@@ -25,7 +25,7 @@ namespace :deploy do
 	task :restart do
 		run "ln -s  #{shared_path}/uploads/ #{current_path}/public/uploads"
 		
-		run "cd #{current_path};rake db:migrate RAILS_ENV=production; rake cache:clear"
+		run "cd #{current_path};rake db:migrate RAILS_ENV=production; RAILS_ENV=production rake cache:clear "
 	end
 end
 

@@ -128,7 +128,7 @@
          <option value="font-white" selected="selected">-- Default --</option>
          <option value="font-blue">藍字 / Blue</option>
          <option value="font-red">紅字 / Red</option>
-         <option value="font-pink" selected="selected">粉紅 / Pink</option>
+         <option value="font-pink">粉紅 / Pink</option>
        </select>
        <textarea id="newParagraphContent" class="autogrow" placeholder="請將段落輸入在此處"></textarea>
        <input type="text" id="newParagraphLink" placeholder="此段落連結至何處（若無請勿輸入）" />
@@ -163,6 +163,10 @@
     </section>
     <!--preview-->
     
+    <section class="button">
+    <a id="btnSubmit2" href="javascript:void(0);"><img src="<%= image_path("save.png") %>">儲存</a>
+    <a id="btnCancel2" href="javascript:void(0);"><img src="<%= image_path("cancel.png") %>">取消</a>
+    </section>
     <!--button--> 
   </article>
       
@@ -514,12 +518,12 @@ $(document).ready(function(){
   function nl2br(string) { return string.replace(/\n/g, "<br />");}
   function br2nl(string) { return string.replace(/<br[ \/]*>/g, "\n");}
 
-  $("#btnSubmit").click(function(){
+  $("#btnSubmit, #btnSubmit2").click(function(){
     $("#brief_name").val($("#brief_title").val());
     $(form).submit();
   });
 
-  $("#btnCancel").click(function(){
+  $("#btnCancel, #btnCancel2").click(function(){
     $("#brief_content").val($("#brief_contentOrigin").val());
     $("#brief_name").val($("#brief_nameOrigin").val());
     $(form).submit();

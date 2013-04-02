@@ -1,4 +1,7 @@
 zh_TW:
+  locale: "繁中"
+  flag_png: "tw.png"
+  
   date:
     format:
       default: "%d-%m-%Y"
