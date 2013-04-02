@@ -8,5 +8,5 @@ class Brief < ActiveRecord::Base
   mount_uploader :cover, MovieCoverUploader
   mount_uploader :inner_photo, InnerPhotoUploader
   
-  translates :content, :intro
+  translates :content, :intro, :fallbacks_for_empty_translations => true
 end
