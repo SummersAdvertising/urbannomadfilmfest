@@ -2,3 +2,10 @@ zh_TW:
   date:
     format:
       default: "%d-%m-%Y"
+      
+  menu:
+    talks: "座談會"
+    schedule: "檔期表"
+    short_film: "短片"
+    features_film: "長片"
+  

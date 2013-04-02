@@ -6,7 +6,7 @@ class Admin::BriefsController < ApplicationController
   def index
   	@categories = Category.all
   	
-    @briefs = @category.briefs.order('created_at DESC').page(params[:page]).per(10)
+    @briefs = @category.briefs.order('date DESC').page(params[:page]).per(10)
 
     respond_to do |format|
       format.html # index.html.erb

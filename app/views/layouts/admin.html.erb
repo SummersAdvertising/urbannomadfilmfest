@@ -90,7 +90,10 @@ $(function(){
 <body>
 <header _height="none">
   <section id="top"> <a id="nav-ctrl"><img src="<%= image_path("nav.png") %>"></a>
-    <div id="lang"> <a href="#"><img src="<%= image_path("tw.png") %>"> 繁中</a> <a href="#"><img src="<%= image_path("us.png") %>"> English</a> </div>
+    <div id="lang"> 
+    	<%= link_to image_tag('tw.png') + ' 繁中', url_for( :locale => :zh_TW ) %>
+    	<%= link_to image_tag('us.png') + 'English', url_for( :locale => :en ) %>
+    </div>
     <h1><a href="#">遊牧影展後台管理系統</a></h1>
     <aside> <a id="aside-ctrl"><img src="<%= image_path("set.png") %>"></a>
       <div id="aside-box"> 

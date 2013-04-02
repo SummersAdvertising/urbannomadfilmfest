@@ -1,3 +1,10 @@
 zh_TW:
   configs:
     style: "style-zh"
+    footer: "footer_tw"
+    
+    
+en:
+  configs:
+    style: "style-en"
+    footer: "footer_en"

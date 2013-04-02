@@ -3,7 +3,7 @@ class StaticPageController < ApplicationController
   def index
   
   	# get film list
-  	@briefs = Brief.order( "updated_at DESC" ).all
+  	@briefs = Brief.order( "date DESC" ).all
   
 	  	  
   

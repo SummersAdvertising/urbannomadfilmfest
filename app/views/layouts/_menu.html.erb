@@ -1,9 +1,9 @@
 <nav>
     <ul>
       <li><a href="index.html" id="nav-home" class="ablock">home</a></li>
-      <li><a href="#" class="atext">English</a></li>
+      <li><%= link_to "English", url_for( :locale => :en ), :class => "atext" %></li>
       <li><a class="atext">/</a></li>
-      <li><a href="#" class="atext">中文</a></li>
+      <li><%= link_to "中文", url_for( :locale => :zh_TW ), :class => "atext"  %></li>
       <li><a href="http://www.facebook.com/UrbanNomad.tw" target="_blank" id="nav-fb" class="ablock">
         <div class="flipper">
           <div class="front"> facebook </div>
@@ -12,25 +12,25 @@
         </a></li>
       <li><a href="#" id="nav-04" class="ablock">
         <div class="flipper">
-          <div class="front"> 座談會 </div>
+          <div class="front"> <%= t("menu.talks") %> </div>
           <div class="back"> </div>
         </div>
         </a></li>
       <li><a href="#" id="nav-03" class="ablock">
         <div class="flipper">
-          <div class="front"> 檔期表 </div>
+          <div class="front"> <%= t("menu.schedule")%> </div>
           <div class="back"> </div>
         </div>
         </a></li>
       <li><a href="<%= category_briefs_path( :category_id => "short", :locale => I18n.locale ) %>" id="nav-02" class="ablock">
         <div class="flipper">
-          <div class="front"> 短片 </div>
+          <div class="front"> <%= t("menu.short_film")%> </div>
           <div class="back"> </div>
         </div>
         </a></li>
       <li><a href="<%= category_briefs_path( :category_id => "full", :locale => I18n.locale ) %>" id="nav-01" class="ablock">
         <div class="flipper">
-          <div class="front"> 長片 </div>
+          <div class="front"> <%= t("menu.features_film")%> </div>
           <div class="back"> </div>
         </div>
         </a></li>

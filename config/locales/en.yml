@@ -1,9 +1,12 @@
 # Sample localization file for English. Add more files in this directory for other locales.
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
-
-
 en:
   date:
     format:
       default: "%d-%m-%Y"
+      
+  menu:
+    talks: "FUUDAI FILM TALKS"
+    schedule: "檔期表"
+    short_film: "短片"
+    features_film: "長片"
