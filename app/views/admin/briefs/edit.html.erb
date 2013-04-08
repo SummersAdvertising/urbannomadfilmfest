@@ -484,7 +484,7 @@ $(document).ready(function(){
 
           if(JSON.stringify(paragraph.type)=='"paragraph"')
           {
-            article = "<div class='paragraphContainer ui-state-default dragItem' data-type='paragraph'><ul class='tool-b'><li><a name='edit'>編輯</a></li><li><a name='delete'>刪除</a></li></ul><p class='"+paragraph.cssclass+"' style = ' font-size: "+paragraph.fontSize+"; color: "+paragraph.color+"'>";
+            article = "<div class='paragraphContainer ui-state-default dragItem' data-type='paragraph'><ul class='tool-b'><li><a name='edit'>編輯</a></li><li><a name='delete'>刪除</a></li></ul><p class='"+paragraph.cssclass+"'>";
             if(paragraph.link){
               article += "<a target='_blank' href='"+paragraph.link+"'>"+jsonReplace(JSON.stringify(paragraph.content)).replace(/\\n/g, "<br />")+"</a></p></div>";
             }
