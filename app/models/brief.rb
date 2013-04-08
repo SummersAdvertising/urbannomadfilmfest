@@ -9,4 +9,16 @@ class Brief < ActiveRecord::Base
   mount_uploader :inner_photo, InnerPhotoUploader
   
   translates :content, :intro, :fallbacks_for_empty_translations => true
+  
+  before_save :fill_empty_date
+  
+  def fill_empty_date
+  
+  	if self.date.nil?
+  		self.date = Time.now
+  	end
+  
+  end
+  
+  
 end
