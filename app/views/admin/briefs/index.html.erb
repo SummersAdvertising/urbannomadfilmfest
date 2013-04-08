@@ -5,6 +5,7 @@
       <ul>
         <li <%= 'class="active"'.html_safe if @category.namehash == 'full' %>><%= link_to '長片類' ,admin_category_briefs_path('full', :locale => I18n.locale ) %></li>
         <li <%= 'class="active"'.html_safe if @category.namehash == 'short' %>><%= link_to '短片類', admin_category_briefs_path('short', :locale => I18n.locale) %></li>
+        <li <%= 'class="active"'.html_safe if @category.namehash == 'talks' %>><%= link_to '座談會', admin_category_briefs_path('talks', :locale => I18n.locale) %></li>
       </ul>
     </section>
     <!--category-->

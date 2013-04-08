@@ -27,6 +27,7 @@
 # Define categories for languages
 @full_category = Category.new
 @short_category = Category.new
+@talks_category = Category.new
 I18n.locale = :en
 @full_category.title = "Full-length"
 @full_category.namehash = "full"
@@ -36,8 +37,14 @@ I18n.locale = :en
 @short_category.namehash = "short"
 @short_category.save
 
+@talks_category.title = "Talks"
+@talks_category.namehash = "talks"
+@talks_category.save
+
 I18n.locale = :zh_TW
 @full_category.title = "長片"
 @full_category.save
 @short_category.title = "短片"
 @short_category.save
+@talks_category.title = "座談會"
+@talks_category.save

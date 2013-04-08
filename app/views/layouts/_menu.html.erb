@@ -1,6 +1,6 @@
 <nav>
     <ul>
-      <li><a href="index.html" id="nav-home" class="ablock">home</a></li>
+      <li><a href="<%= root_url %>" id="nav-home" class="ablock">home</a></li>
       <li><%= link_to "English", url_for( :locale => :en ), :class => "atext" %></li>
       <li><a class="atext">/</a></li>
       <li><%= link_to "中文", url_for( :locale => :zh_TW ), :class => "atext"  %></li>
@@ -10,7 +10,7 @@
           <div class="back"> </div>
         </div>
         </a></li>
-      <li><a href="#" id="nav-04" class="ablock">
+      <li><a href="<%= category_briefs_path( :category_id => "talks", :locale => I18n.locale ) %>" id="nav-04" class="ablock">
         <div class="flipper">
           <div class="front"> <%= t("menu.talks") %> </div>
           <div class="back"> </div>
