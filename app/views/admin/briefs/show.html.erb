@@ -106,7 +106,9 @@ $(document).ready(function() {
           article = "<a href="+JSON.stringify(paragraph.link)+" target='_blank'><img alt=" + JSON.stringify(paragraph.imgid) + " src=" + JSON.stringify(paragraph.imgpath) + " title=" + JSON.stringify(paragraph.imgid) + " /></a>";
         }
         else if (JSON.stringify(paragraph.type)=='"video"') {
-          article = "<div  class='paragraphContainer' data-type='video' data-code=\"" + paragraph.code + "\"><iframe width=\"480\" height=\"290\" data-code=\"" + paragraph.code + "\" src=\"http://www.youtube.com/embed/" + paragraph.code+ "\" frameborder=\"0\" allowfullscreen></iframe></div>";
+        
+      	  var sourceLink = getVideoSourceLink(paragraph.provider);
+          article = "<div  class='paragraphContainer' data-type='video' data-code=\"" + paragraph.code + "\"><iframe width=\"480\" height=\"290\" data-code=\"" + paragraph.code + "\" src=\"" + sourceLink + paragraph.code+ "\" frameborder=\"0\" allowfullscreen></iframe></div>";
         }
         $("#articleContent").append(article);
       }

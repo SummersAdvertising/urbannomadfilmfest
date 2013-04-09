@@ -1,5 +1,10 @@
 article{padding:18px 40px 0 40px}
 
+	article a {
+		color: #ff00ef;
+		text-decoration: underline;
+	}
+
 #turntable{height:377px;margin:0 0 20px 0}
 .prev,.next,.post{float:left}
 .prev a,.next a{display:block;width:57px;height:377px;

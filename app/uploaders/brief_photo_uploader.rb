@@ -25,7 +25,7 @@ class BriefPhotoUploader < CarrierWave::Uploader::Base
   after :store, :delete_tmp_dir
 
   # resize all the upload pics
-  process :resize_to_limit => [360, nil]
+  process :resize_to_limit => [540, nil]
 
   def extension_white_list
     %w(jpg jpeg gif png)

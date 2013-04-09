@@ -187,13 +187,6 @@ $(document).ready(function(){
 <script type="text/javascript">
   var form = "#edit_brief_<%= params[:id]%>";
 
-  function getYoutubeCode( link ) {
-    if ( link != undefined ) {
-      return /[a-zA-Z0-9\?\.\:\/&=]+v=([a-zA-Z0-9_\-]+)&?.*/.exec(link)[1];
-    }
-    return '';
-  }
-
   $("#briefFrontshow").change(function(){
     $("#brief_status").val($(this).is(':checked')? "enable":"disable");
   });
@@ -281,8 +274,10 @@ $(document).ready(function(){
 	  
     if( $("#newVideoContent").val() ){
       var container = $('<div class="paragraphContainer ui-state-default dragItem" data-type="video"></div>');
-      var code = getYoutubeCode( $("#newVideoContent").val());
-      var paragraph = $('<iframe width="480" height="290" data-code="' + code + '" src="http://www.youtube.com/embed/' + code + '" frameborder="0" allowfullscreen></iframe>');
+      
+      var videoInfo = getVideoInfo($("#newVideoContent").val());
+      
+      var paragraph = $('<iframe width="480" height="290" data-provider="' + videoInfo.provider + '" data-code="' + videoInfo.code + '" src="' + videoInfo.sourceLink + videoInfo.code + '" frameborder="0" allowfullscreen></iframe>');
       container.append(paragraph);
 
       $("#articleContent").append(container);
@@ -450,6 +445,8 @@ $(document).ready(function(){
         var video = new Object();
         video.type = "video";
         video.code = $(this).data("code");
+        video.provider = $(this).data("provider");
+        console.log(video);
         obj.article.push(video);
       }
     });
@@ -496,7 +493,9 @@ $(document).ready(function(){
           {
             article = "<div  class='paragraphContainer ui-state-default dragItem' data-type='image' data-photo_id=\"" + paragraph.id + "\"><ul class='tool-b'><li><a href='/admin/categories/<%= params[:category_id]%>/briefs/<%= params[:id]%>/deletePhoto/" + paragraph.id + "' data-method='delete' rel='nofollow' data-remote='true'>刪除</a></li></ul><img alt=" + JSON.stringify(paragraph.id) + " src=" + JSON.stringify(paragraph.path) + " title=" + JSON.stringify(paragraph.id) + " /></div>";
           } else if (JSON.stringify(paragraph.type)=='"video"') {
-	          article = "<div  class='paragraphContainer ui-state-default dragItem' data-type='video' data-code=\"" + paragraph.code + "\"><ul class='tool-b'><li><a name='delete'>刪除</a></li></ul><iframe width=\"480\" height=\"290\" data-code=\"" + paragraph.code + "\" src=\"http://www.youtube.com/embed/" + paragraph.code+ "\" frameborder=\"0\" allowfullscreen></iframe></div>";
+          	  
+          	  var sourceLink = getVideoSourceLink(paragraph.provider);          	  
+	          article = "<div  class='paragraphContainer ui-state-default dragItem' data-type='video' data-code=\"" + paragraph.code + "\"><ul class='tool-b'><li><a name='delete'>刪除</a></li></ul><iframe width=\"480\" height=\"290\" data-provider=\"" + paragraph.provider + "\" data-code=\"" + paragraph.code + "\" src=\"" + sourceLink + paragraph.code+ "\" frameborder=\"0\" allowfullscreen></iframe></div>";
 	      }
 
 
