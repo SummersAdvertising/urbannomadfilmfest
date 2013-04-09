@@ -22,13 +22,13 @@
   
   function getVideoSourceLink(provider) {
 	  
-	switch ( provider ) {
-	  case "youtube":
-	    return "http://www.youtube.com/embed/";
-	  break;
-	  
+	switch ( provider ) {	  
 	  case "vimeo":
 	    return "http://player.vimeo.com/video/";	          	 
+	  break;
+	  default:
+	  case "youtube":
+	    return "http://www.youtube.com/embed/";
 	  break;
 	}
   }
@@ -43,11 +43,12 @@
 	  	  var re = new RegExp("/.*" + providerList[p] + ".*/", "g");
 	  
 		  if ( re.test(link) ) {
+		  console.log(link);
 			  return providerList[p];
 		  }
 	  }
 	  
-	  return false;
+	  return 'youtube';
 	  
   }
 
