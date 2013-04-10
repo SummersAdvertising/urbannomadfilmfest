@@ -20,5 +20,4 @@ class Brief < ActiveRecord::Base
   
   end
   
-  
 end

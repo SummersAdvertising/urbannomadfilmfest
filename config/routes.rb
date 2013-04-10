@@ -26,6 +26,10 @@ Urbannomadfilmfest::Application.routes.draw do
 		end
 	end
 	
+	match "pages/:page"		=> "static_page#show"
+	#resource :pages, :only => :page
+	
+	
 	root :to => "static_page#index"
   	
   end

@@ -8,6 +8,12 @@ class StaticPageController < ApplicationController
 	  	  
   
   end
-  def intro 	
+  def show
+  	@page = params[ :page ]
+  	
+  	respond_to do | format |
+  		format.html{ render :template => "static_page/schedule" }
+  	end
+  	
   end
 end
