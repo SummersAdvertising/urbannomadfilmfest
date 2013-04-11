@@ -2,9 +2,11 @@ zh_TW:
   configs:
     style: "style-zh"
     footer: "footer_zh"
+    meta: "meta_zh"
     
     
 en:
   configs:
     style: "style-en"
     footer: "footer_en"
+    meta: "meta_en"
