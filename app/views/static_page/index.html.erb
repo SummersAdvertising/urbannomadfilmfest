@@ -14,9 +14,9 @@
 <%= render :partial => 'layouts/' + t("configs.meta") %>
 
 
-<link rel="SHORTCUT ICON" href="image_path("favicon.ico")"/>
-<link rel="image_src" href="image_path("thumb.jpg")"/>
-<meta property="og:image" content="image_path("thumb.jpg")"/>
+<link rel="SHORTCUT ICON" href="<%= image_path("favicon.ico") %>"/>
+<link rel="image_src" href="<%= image_path("thumb.jpg") %>"/>
+<meta property="og:image" content="<%= image_path("thumb.jpg") %>"/>
 
 
 <meta property="og:type" content="Movie"/>
