@@ -17,7 +17,7 @@
 
 <link rel="SHORTCUT ICON" href="<%= image_path("favicon.ico") %>"/>
 <link rel="image_src" href="<%= image_path("thumb.jpg") %>"/>
-<meta property="og:image" content="<%= image_path("thumb.jpg") %>"/>
+<meta property="og:image" content="http://urbannomadfilmfest.summers.com.tw/images/thumb.jpg"/>
 
 	<%= stylesheet_link_tag "reset", :media => "all" %>
 	<%= stylesheet_link_tag "common", :media => "all" %>
@@ -25,7 +25,16 @@
 	<%= javascript_include_tag "application" %>
 	<%= csrf_meta_tags %>
 	
-	
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-40044677-1', 'summers.com.tw');
+  ga('send', 'pageview');
+
+</script>	
 </head>
 
 <body>
